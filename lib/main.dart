@@ -4,8 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'package:google_fonts/google_fonts.dart';
-import 'package:stok_takip_offline/pages/main_page/view/main_page.dart';
+import 'package:stok_takip_offline/pages/main/view/main_page.dart';
 import 'package:stok_takip_offline/pages/new_stock/view/new_stock_page.dart';
+import 'package:stok_takip_offline/pages/report/view/report_page.dart';
 import 'package:stok_takip_offline/pages/stock_delete_update/view/stock_delete_update_page.dart';
 import 'package:stok_takip_offline/pages/stock_in_out/view/stock_in_out.dart';
 import 'package:stok_takip_offline/pages/stock_list/view/stock_list.dart';
@@ -41,6 +42,7 @@ class _MyAppState extends State<MyApp> {
         GetPage(name: '/menu2', page: () => NewStockPage()),
         GetPage(name: '/menu3', page: () => StockDeleteUpdatePage()),
         GetPage(name: '/menu4', page: () => StockListPage()),
+        GetPage(name: '/menu5', page: () => ReportPage()),
         // GetPage(name: 'menu1', page: () => null, binding: SampleBind()),
       ],
     );
