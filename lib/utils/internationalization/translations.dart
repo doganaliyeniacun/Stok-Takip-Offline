@@ -24,6 +24,10 @@ class StokTakipTranlations extends Translations {
           'purchasePrice': 'Alış Fiyatı',
           'salePrice': 'Satış Fiyatı',
           'save': 'Kaydet',
+
+          //delete - update
+          'delete': 'Sil',
+          'update': 'Güncelle',
         },
         'en_US': {
           'menu1': 'Stock\nIn - Out',
@@ -45,6 +49,10 @@ class StokTakipTranlations extends Translations {
           'purchasePrice': 'Purchase Price',
           'salePrice': 'Sale Price',
           'save': 'Save',
+
+          //delete - update
+          'delete': 'Delete',
+          'update': 'Update',
         }
       };
 }
