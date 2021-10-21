@@ -18,6 +18,12 @@ class StokTakipTranlations extends Translations {
           'unit': 'Adet',
           'in': 'Stok Girişi',
           'out': 'Stok Çıkışı',
+
+          //new stock
+          'stockName': 'Stok Adı (Zorunlu)',
+          'purchasePrice': 'Alış Fiyatı',
+          'salePrice': 'Satış Fiyatı',
+          'save': 'Kaydet',
         },
         'en_US': {
           'menu1': 'Stock\nIn - Out',
@@ -33,6 +39,12 @@ class StokTakipTranlations extends Translations {
           'unit': 'Unit',
           'in': 'Stock In',
           'out': 'Stock Out',
+
+          //new stock
+          'stockName': 'Stock Name (Required)',
+          'purchasePrice': 'Purchase Price',
+          'salePrice': 'Sale Price',
+          'save': 'Save',
         }
       };
 }
@@ -43,7 +55,4 @@ class InitTranslations extends GetxController {
     Get.updateLocale(Locale(Get.deviceLocale.toString()));
     super.onReady();
   }
-
-  String test = "test";
 }
-
