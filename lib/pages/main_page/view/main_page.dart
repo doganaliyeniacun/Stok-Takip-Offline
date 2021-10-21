@@ -21,9 +21,9 @@ class MainPage extends GetView<InitTranslations> {
       color: Colors.white,
       child: Column(
         children: [
-          const Expanded(
+          Expanded(
             flex: 1,
-            child: TopBanner(),
+            child: TopBanner(color: AppConstant.blueShade200),
           ),
           const Expanded(
             flex: 6,
@@ -48,17 +48,29 @@ class MainPage extends GetView<InitTranslations> {
         CustomMenuCard1(
           name: "menu1",
           function: () => Get.toNamed("/menu1"),
+          color: AppConstant.blueShade200,
         ),
-        const CustomMenuCard1(name: "menu2"),
-        const CustomMenuCard1(name: "menu3"),
-        const CustomMenuCard1(name: "menu4"),
-        const CustomMenuCard1(name: "menu5"),
-        const CustomMenuCard1(name: "menu6"),
+        CustomMenuCard1(
+          name: "menu2",
+          color: AppConstant.blueShade200,
+        ),
+        CustomMenuCard1(
+          name: "menu3",
+          color: AppConstant.blueShade200,
+        ),
+        CustomMenuCard1(
+          name: "menu4",
+          color: AppConstant.blueShade200,
+        ),
+        CustomMenuCard1(
+          name: "menu5",
+          color: AppConstant.blueShade200,
+        ),
+        CustomMenuCard1(
+          name: "menu6",
+          color: AppConstant.blueShade200,
+        ),
       ],
     );
   }
 }
-
-
-
-

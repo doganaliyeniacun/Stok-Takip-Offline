@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 
 class TopBanner extends StatelessWidget {
-  const TopBanner({
+  TopBanner({
     Key? key,
+    this.color = Colors.blue,
   }) : super(key: key);
+
+  final Color color;
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +17,7 @@ class TopBanner extends StatelessWidget {
       ),
       child: Container(
         decoration: BoxDecoration(
-          color: Colors.blue.shade200,
+          color: color,
           borderRadius: const BorderRadius.vertical(
             bottom: Radius.circular(20),
           ),

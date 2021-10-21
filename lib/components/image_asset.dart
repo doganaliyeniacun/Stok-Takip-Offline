@@ -9,7 +9,7 @@ class CenterImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Image.asset(
-      AppConstructor.stockImg,
+      AppConstant.stockImg,
       fit: BoxFit.contain,
     );
   }

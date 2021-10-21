@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:stok_takip_offline/components/image_asset.dart';
 import 'package:stok_takip_offline/core/components/banner/top_banner.dart';
+import 'package:stok_takip_offline/utils/const/const.dart';
 
 class StockInOutPage extends StatelessWidget {
   StockInOutPage({Key? key}) : super(key: key);
@@ -26,9 +27,9 @@ class StockInOutPage extends StatelessWidget {
       color: Colors.white,
       child: Column(
         children: [
-          const Expanded(
+          Expanded(
             flex: 1,
-            child: TopBanner(),
+            child: TopBanner(color: AppConstant.blueShade200),
           ),
           const Expanded(
             flex: 6,
@@ -46,6 +47,7 @@ class StockInOutPage extends StatelessWidget {
                       SizedBox(height: Get.height * 0.02),
                       CustomTextFormField1(
                         name: "code",
+
                         // validator: (value) =>
                         //     value == "1" ? "Bilinmeyen Stok Kodu" : null,
                         // onSaved: (p0) => print("Kayıt başarılı"),
@@ -65,12 +67,16 @@ class StockInOutPage extends StatelessWidget {
                               //     formState.currentState!.save();
                               //   }
                               // },
+                              function: () => print("test"),
+                              color: AppConstant.blueShade200,
                             ),
                           ),
                           SizedBox(width: Get.width * 0.04),
                           Expanded(
                             child: CustomElevatedButton1(
                               name: "out",
+                              function: () => print("test"),
+                              color: AppConstant.blueShade200,
                             ),
                           ),
                         ],
@@ -122,9 +128,12 @@ class CustomElevatedButton1 extends StatelessWidget {
     Key? key,
     this.name = "",
     this.function,
+    this.color = Colors.blue,
   }) : super(key: key);
 
-  String name;
+  final String name;
+  final Color color;
+
   void Function()? function;
 
   @override
@@ -142,7 +151,7 @@ class CustomElevatedButton1 extends StatelessWidget {
         ),
       ),
       style: ElevatedButton.styleFrom(
-        primary: Colors.blue.shade200,
+        primary: color,
       ),
     );
   }
