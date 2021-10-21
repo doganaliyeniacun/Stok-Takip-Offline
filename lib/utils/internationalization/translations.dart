@@ -28,6 +28,17 @@ class StokTakipTranlations extends Translations {
           //delete - update
           'delete': 'Sil',
           'update': 'Güncelle',
+
+          //report
+          'totalStockIn': 'Toplam Stok Girişi',
+          'totalStockOut': 'Toplam Stok Çıkışı',
+          'outgoingMoney': 'Yapılan Ödeme',
+          'incomingMoney': 'Alınan Ödeme',
+          'cashReport': 'KASA RAPORU',
+          'balance': 'Toplam Gelir',
+          'daily': 'GÜNLÜK',
+          'weekly': 'HAFTALIK',
+          'monthly': 'AYLIK',
         },
         'en_US': {
           'menu1': 'Stock\nIn - Out',
@@ -53,6 +64,17 @@ class StokTakipTranlations extends Translations {
           //delete - update
           'delete': 'Delete',
           'update': 'Update',
+
+          //report
+          'totalStockIn': 'Total Stock In',
+          'totalStockOut': 'Total Stock Out',
+          'outgoingMoney': 'Outgoing Money',
+          'incomingMoney': 'Incoming Money',
+          'cashReport': 'CASH REPORT',
+          'balance': 'Balance',
+          'daily': 'DAİLY',
+          'weekly': 'WEEKLY',
+          'monthly': 'MONTHLY',
         }
       };
 }
