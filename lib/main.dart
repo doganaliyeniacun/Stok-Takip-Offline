@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'package:google_fonts/google_fonts.dart';
+import 'package:stok_takip_offline/database/database_helper.dart';
+import 'package:stok_takip_offline/database/database_model.dart';
 import 'package:stok_takip_offline/pages/main/view/main_page.dart';
 import 'package:stok_takip_offline/pages/new_stock/view/new_stock_page.dart';
 import 'package:stok_takip_offline/pages/report/view/report_page.dart';
@@ -22,6 +24,13 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   InitTranslations initTranslations = Get.put(InitTranslations());
+  final DatabaseHelper _databaseHelper = Get.put(DatabaseHelper());
+
+  @override
+  void initState() {
+    super.initState();
+    _databaseHelper.database;
+  }
 
   @override
   Widget build(BuildContext context) {

@@ -4,6 +4,9 @@ import 'package:stok_takip_offline/components/image_asset.dart';
 import 'package:stok_takip_offline/core/components/banner/top_banner.dart';
 import 'package:stok_takip_offline/core/components/buttons/elevated_button1.dart';
 import 'package:stok_takip_offline/core/components/text_form_field/text_form_field1.dart';
+import 'package:stok_takip_offline/database/database_helper.dart';
+import 'package:stok_takip_offline/database/database_model.dart';
+import 'package:stok_takip_offline/pages/new_stock/controller/new_stock_controller.dart';
 import 'package:stok_takip_offline/utils/const/const.dart';
 
 class NewStockPage extends StatelessWidget {
@@ -11,6 +14,9 @@ class NewStockPage extends StatelessWidget {
 
   GlobalKey<FormState> formState = GlobalKey();
   GlobalKey<ScaffoldState> scaffold = GlobalKey();
+
+  NewStockController _newStockController = Get.put(NewStockController());
+  DatabaseHelper databaseHelper = Get.put(DatabaseHelper());
 
   @override
   Widget build(BuildContext context) {
@@ -52,6 +58,7 @@ class NewStockPage extends StatelessWidget {
                           children: [
                             CustomTextFormField1(
                               name: "stockName",
+                              textEditingController: _newStockController.row1,
                             ),
                             SizedBox(height: Get.height * 0.01),
                             Stack(
@@ -60,6 +67,8 @@ class NewStockPage extends StatelessWidget {
                                 CustomTextFormField1(
                                   name: "code",
                                   textInputType: TextInputType.number,
+                                  textEditingController:
+                                      _newStockController.row2,
                                   // validator: (value) =>
                                   //     value == "1" ? "Bilinmeyen Stok Kodu" : null,
                                   // onSaved: (p0) => print("Kayıt başarılı"),
@@ -89,19 +98,22 @@ class NewStockPage extends StatelessWidget {
                             SizedBox(height: Get.height * 0.01),
                             CustomTextFormField1(
                               name: "unit",
-                              prefixIcon: Icons.add_circle_outline_outlined
+                              prefixIcon: Icons.add_circle_outline_outlined,
+                              textEditingController: _newStockController.row3,
                             ),
                             SizedBox(height: Get.height * 0.01),
                             CustomTextFormField1(
                               name: "purchasePrice",
                               textInputType: TextInputType.number,
-                              prefixIcon: Icons.add_shopping_cart_rounded
+                              prefixIcon: Icons.add_shopping_cart_rounded,
+                              textEditingController: _newStockController.row4,
                             ),
                             SizedBox(height: Get.height * 0.01),
                             CustomTextFormField1(
                               name: "salePrice",
                               textInputType: TextInputType.number,
-                              prefixIcon: Icons.attach_money_sharp
+                              prefixIcon: Icons.attach_money_sharp,
+                              textEditingController: _newStockController.row5,
                             ),
                             SizedBox(height: Get.height * 0.01),
                             CustomElevatedButton1(
@@ -111,7 +123,14 @@ class NewStockPage extends StatelessWidget {
                               //     formState.currentState!.save();
                               //   }
                               // },
-                              function: () => print("test"),
+                              function: () {
+                                _newStockController.newStock();
+                                var list = <DatabaseModel>[];
+                                databaseHelper.getAllNotes().then((value) {
+                                  list = value;
+                                  print(list[0].stockName);
+                                });
+                              },
                               color: AppConstant.blueShade200,
                             ),
                           ],
@@ -129,8 +148,6 @@ class NewStockPage extends StatelessWidget {
   }
 }
 
-
-class test extends CustomTextFormField1{
+class test extends CustomTextFormField1 {
   test({Key? key}) : super(key: key);
-  
 }
