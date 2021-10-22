@@ -9,13 +9,20 @@ import 'package:stok_takip_offline/database/database_model.dart';
 import 'package:stok_takip_offline/pages/new_stock/controller/new_stock_controller.dart';
 import 'package:stok_takip_offline/utils/const/const.dart';
 
-class NewStockPage extends StatelessWidget {
+class NewStockPage extends StatefulWidget {
   NewStockPage({Key? key}) : super(key: key);
 
+  @override
+  State<NewStockPage> createState() => _NewStockPageState();
+}
+
+class _NewStockPageState extends State<NewStockPage> {
   GlobalKey<FormState> formState = GlobalKey();
+
   GlobalKey<ScaffoldState> scaffold = GlobalKey();
 
-  NewStockController _newStockController = Get.put(NewStockController());
+  final NewStockController _newStockController = Get.put(NewStockController());
+
   DatabaseHelper databaseHelper = Get.put(DatabaseHelper());
 
   @override
@@ -49,95 +56,7 @@ class NewStockPage extends StatelessWidget {
                 ),
                 Expanded(
                   flex: 7,
-                  child: Padding(
-                    padding: const EdgeInsets.all(20),
-                    child: SingleChildScrollView(
-                      child: Form(
-                        key: formState,
-                        child: Column(
-                          children: [
-                            CustomTextFormField1(
-                              name: "stockName",
-                              textEditingController: _newStockController.row1,
-                            ),
-                            SizedBox(height: Get.height * 0.01),
-                            Stack(
-                              alignment: Alignment.centerRight,
-                              children: [
-                                CustomTextFormField1(
-                                  name: "code",
-                                  textInputType: TextInputType.number,
-                                  textEditingController:
-                                      _newStockController.row2,
-                                  // validator: (value) =>
-                                  //     value == "1" ? "Bilinmeyen Stok Kodu" : null,
-                                  // onSaved: (p0) => print("Kayıt başarılı"),
-                                ),
-                                Positioned(
-                                  right: Get.width * 0.02,
-                                  child: Row(
-                                    children: [
-                                      Icon(
-                                        Icons.find_replace_sharp,
-                                        size: 30,
-                                        color: AppConstant.blueShade200,
-                                      ),
-                                      SizedBox(width: Get.width * 0.03),
-                                      Container(
-                                        height: Get.height * 0.05,
-                                        child: Image.asset(
-                                          "assets/barcode.png",
-                                          fit: BoxFit.cover,
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                )
-                              ],
-                            ),
-                            SizedBox(height: Get.height * 0.01),
-                            CustomTextFormField1(
-                              name: "unit",
-                              prefixIcon: Icons.add_circle_outline_outlined,
-                              textEditingController: _newStockController.row3,
-                            ),
-                            SizedBox(height: Get.height * 0.01),
-                            CustomTextFormField1(
-                              name: "purchasePrice",
-                              textInputType: TextInputType.number,
-                              prefixIcon: Icons.add_shopping_cart_rounded,
-                              textEditingController: _newStockController.row4,
-                            ),
-                            SizedBox(height: Get.height * 0.01),
-                            CustomTextFormField1(
-                              name: "salePrice",
-                              textInputType: TextInputType.number,
-                              prefixIcon: Icons.attach_money_sharp,
-                              textEditingController: _newStockController.row5,
-                            ),
-                            SizedBox(height: Get.height * 0.01),
-                            CustomElevatedButton1(
-                              name: "save",
-                              // function: () {
-                              //   if (formState.currentState!.validate()) {
-                              //     formState.currentState!.save();
-                              //   }
-                              // },
-                              function: () {
-                                _newStockController.newStock();
-                                var list = <DatabaseModel>[];
-                                databaseHelper.getAllNotes().then((value) {
-                                  list = value;
-                                  print(list[0].stockName);
-                                });
-                              },
-                              color: AppConstant.blueShade200,
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
+                  child: newStockForm(),
                 ),
               ],
             ),
@@ -146,8 +65,117 @@ class NewStockPage extends StatelessWidget {
       ),
     );
   }
-}
 
-class test extends CustomTextFormField1 {
-  test({Key? key}) : super(key: key);
+  Padding newStockForm() {
+    return Padding(
+      padding: const EdgeInsets.all(20),
+      child: SingleChildScrollView(
+        child: Form(
+          key: formState,
+          child: Column(
+            children: [
+              row1(),
+              SizedBox(height: Get.height * 0.01),
+              row2(),
+              SizedBox(height: Get.height * 0.01),
+              row3(),
+              SizedBox(height: Get.height * 0.01),
+              row4(),
+              SizedBox(height: Get.height * 0.01),
+              row5(),
+              SizedBox(height: Get.height * 0.01),
+              saveButton(),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  CustomElevatedButton1 saveButton() {
+    return CustomElevatedButton1(
+      name: "save",
+      function: () {
+        if (formState.currentState!.validate()) {
+          formState.currentState!.save();
+          _newStockController.getStockList();
+          _newStockController.newStock();
+          _newStockController.clearTextEditing();
+          _newStockController.saveCheck("snackSave");
+        }
+      },
+      color: AppConstant.blueShade200,
+    );
+  }
+
+  CustomTextFormField1 row5() {
+    return CustomTextFormField1(
+      name: "salePrice",
+      textInputType: TextInputType.number,
+      prefixIcon: Icons.attach_money_sharp,
+      textEditingController: _newStockController.row5,
+    );
+  }
+
+  CustomTextFormField1 row4() {
+    return CustomTextFormField1(
+      name: "purchasePrice",
+      textInputType: TextInputType.number,
+      prefixIcon: Icons.add_shopping_cart_rounded,
+      textEditingController: _newStockController.row4,
+    );
+  }
+
+  CustomTextFormField1 row3() {
+    return CustomTextFormField1(
+      name: "unit",
+      prefixIcon: Icons.add_circle_outline_outlined,
+      textEditingController: _newStockController.row3,
+      textInputType: TextInputType.number,
+    );
+  }
+
+  Widget row2() {
+    return Row(
+      children: [
+        Expanded(
+          child: CustomTextFormField1(
+              name: "code",
+              textInputType: TextInputType.text,
+              textEditingController: _newStockController.row2,
+              validator: (value) {
+                if (_newStockController.checkStockCode(value.toString())) {
+                  return "usedStockCode".tr;
+                }
+                if (_newStockController.row2.text.isEmpty) {
+                  return "stockCodeRequired".tr;
+                }
+              }),
+        ),
+        SizedBox(width: Get.width * 0.02),
+        Container(
+          height: Get.height * 0.05,
+          child: Image.asset(
+            "assets/barcode.png",
+            fit: BoxFit.cover,
+          ),
+        )
+      ],
+    );
+  }
+
+  CustomTextFormField1 row1() {
+    return CustomTextFormField1(
+      name: "stockName",
+      textEditingController: _newStockController.row1,
+      validator: (value) {
+        if (_newStockController.checkStockName(value.toString())) {
+          return "usedStockName".tr;
+        }
+        if (_newStockController.row1.text.isEmpty) {
+          return "stockNameRequired".tr;
+        }
+      },
+    );
+  }
 }

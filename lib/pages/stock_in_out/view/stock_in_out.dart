@@ -4,6 +4,7 @@ import 'package:stok_takip_offline/components/image_asset.dart';
 import 'package:stok_takip_offline/core/components/banner/top_banner.dart';
 import 'package:stok_takip_offline/core/components/buttons/elevated_button1.dart';
 import 'package:stok_takip_offline/core/components/text_form_field/text_form_field1.dart';
+import 'package:stok_takip_offline/pages/stock_in_out/controller/stock_in_out_controller.dart';
 import 'package:stok_takip_offline/utils/const/const.dart';
 
 class StockInOutPage extends StatelessWidget {
@@ -11,6 +12,8 @@ class StockInOutPage extends StatelessWidget {
 
   GlobalKey<FormState> formState = GlobalKey();
   GlobalKey<ScaffoldState> scaffold = GlobalKey();
+
+  StockInOutController _stockInOutController = Get.put(StockInOutController());
 
   @override
   Widget build(BuildContext context) {
@@ -37,97 +40,125 @@ class StockInOutPage extends StatelessWidget {
                   flex: 1,
                   child: TopBanner(color: AppConstant.blueShade200),
                 ),
-                const Expanded(
-                  flex: 6,
-                  child: CenterImage(),
-                ),
                 Expanded(
                   flex: 6,
-                  child: Padding(
-                    padding: const EdgeInsets.all(20),
-                    child: SingleChildScrollView(
-                      child: Form(
-                        key: formState,
-                        child: Column(
-                          children: [
-                            SizedBox(height: Get.height * 0.02),
-                            Stack(
-                              alignment: Alignment.centerRight,
-                              children: [
-                                CustomTextFormField1(
-                                  name: "code",
-                                  textInputType: TextInputType.number,
-                                  // validator: (value) =>
-                                  //     value == "1" ? "Bilinmeyen Stok Kodu" : null,
-                                  // onSaved: (p0) => print("Kayıt başarılı"),
-                                ),
-                                Positioned(
-                                  right: Get.width * 0.02,
-                                  child: Row(
-                                    children: [
-                                      Icon(
-                                        Icons.find_replace_sharp,
-                                        size: 30,
-                                        color: AppConstant.blueShade200,
-                                      ),
-                                      SizedBox(width: Get.width * 0.03),
-                                      Container(
-                                        height: Get.height * 0.05,
-                                        child: Image.asset(
-                                          "assets/barcode.png",
-                                          fit: BoxFit.cover,
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                )
-                              ],
-                            ),
-                            SizedBox(height: Get.height * 0.02),
-                            CustomTextFormField1(
-                              name: "explanation",
-                            ),
-                            SizedBox(height: Get.height * 0.02),
-                            CustomTextFormField1(
-                              name: "unit",
-                              textInputType: TextInputType.number,
-                            ),
-                            SizedBox(height: Get.height * 0.02),
-                            Row(
-                              children: [
-                                Expanded(
-                                  child: CustomElevatedButton1(
-                                    name: "in",
-                                    // function: () {
-                                    //   if (formState.currentState!.validate()) {
-                                    //     formState.currentState!.save();
-                                    //   }
-                                    // },
-                                    function: () => print("test"),
-                                    color: AppConstant.blueShade200,
-                                  ),
-                                ),
-                                SizedBox(width: Get.width * 0.04),
-                                Expanded(
-                                  child: CustomElevatedButton1(
-                                    name: "out",
-                                    function: () => print("test"),
-                                    color: AppConstant.blueShade200,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
+                  // child: //CenterImage(),
+                  child: Container(
+                    height: Get.height * 0.10,
+                    child: Obx(
+                      () => ListView.builder(
+                        itemCount: _stockInOutController.list.length,
+                        itemBuilder: (context, index) => Center(
+                          child: Text(
+                              "stock code: ${_stockInOutController.list[index].stockCode.toString()}  unit :${_stockInOutController.list[index].unit.toString()}"),
                         ),
                       ),
                     ),
                   ),
+                ),
+                Expanded(
+                  flex: 6,
+                  child: stockInOutForm(),
                 ),
               ],
             ),
           ),
         ),
       ),
+    );
+  }
+
+  Padding stockInOutForm() {
+    return Padding(
+      padding: const EdgeInsets.all(20),
+      child: SingleChildScrollView(
+        child: Form(
+          key: formState,
+          child: Column(
+            children: [
+              SizedBox(height: Get.height * 0.02),
+              row1(),
+              SizedBox(height: Get.height * 0.02),
+              row2(),
+              SizedBox(height: Get.height * 0.02),
+              row3(),
+              SizedBox(height: Get.height * 0.02),
+              inOutButtons(),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Row inOutButtons() {
+    return Row(
+      children: [
+        Expanded(
+          child: CustomElevatedButton1(
+            name: "in",
+            // function: () {
+            //   if (formState.currentState!.validate()) {
+            //     formState.currentState!.save();
+            //   }
+            // },
+            function: () => _stockInOutController.stockIn(),
+            color: AppConstant.blueShade200,
+          ),
+        ),
+        SizedBox(width: Get.width * 0.04),
+        Expanded(
+          child: CustomElevatedButton1(
+            name: "out",
+            function: () => _stockInOutController.stockOut(),
+            color: AppConstant.blueShade200,
+          ),
+        ),
+      ],
+    );
+  }
+
+  CustomTextFormField1 row3() {
+    return CustomTextFormField1(
+      name: "unit",
+      textInputType: TextInputType.number,
+      textEditingController: _stockInOutController.row3,
+    );
+  }
+
+  CustomTextFormField1 row2() {
+    return CustomTextFormField1(
+      name: "explanation",
+    );
+  }
+
+  Row row1() {
+    return Row(
+      children: [
+        Expanded(
+          child: CustomTextFormField1(
+            name: "code",
+            textInputType: TextInputType.number,
+            textEditingController: _stockInOutController.row1,
+            // validator: (value) =>
+            //     value == "1" ? "Bilinmeyen Stok Kodu" : null,
+            // onSaved: (p0) => print("Kayıt başarılı"),
+          ),
+        ),
+        Icon(
+          Icons.find_replace_sharp,
+          size: 30,
+          color: AppConstant.blueShade200,
+        ),
+        SizedBox(width: Get.width * 0.03),
+        Container(
+          height: Get.height * 0.05,
+          child: Image.asset(
+            "assets/barcode.png",
+            fit: BoxFit.cover,
+          ),
+        )
+      ],
     );
   }
 }

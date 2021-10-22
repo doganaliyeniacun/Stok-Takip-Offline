@@ -20,7 +20,7 @@ class StokTakipTranlations extends Translations {
           'out': 'Stok Çıkışı',
 
           //new stock
-          'stockName': 'Stok Adı (Zorunlu)',
+          'stockName': 'Stok Adı',
           'purchasePrice': 'Alış Fiyatı',
           'salePrice': 'Satış Fiyatı',
           'save': 'Kaydet',
@@ -39,6 +39,13 @@ class StokTakipTranlations extends Translations {
           'daily': 'GÜNLÜK',
           'weekly': 'HAFTALIK',
           'monthly': 'AYLIK',
+
+          //validation
+          'stockNameRequired': 'Lütfen Stok Adı alanını doldurunuz.',
+          'stockCodeRequired': 'Lütfen Stok Kodu alanını doldurunuz.',
+          'usedStockName': 'Bu stok adı daha önce kullanılmış.',
+          'usedStockCode': 'Bu stok kodu daha önce kullanılmış.',
+          'snackSave':'Stok kayededildi',
         },
         'en_US': {
           'menu1': 'Stock\nIn - Out',
@@ -56,7 +63,7 @@ class StokTakipTranlations extends Translations {
           'out': 'Stock Out',
 
           //new stock
-          'stockName': 'Stock Name (Required)',
+          'stockName': 'Stock Name',
           'purchasePrice': 'Purchase Price',
           'salePrice': 'Sale Price',
           'save': 'Save',
@@ -75,6 +82,13 @@ class StokTakipTranlations extends Translations {
           'daily': 'DAİLY',
           'weekly': 'WEEKLY',
           'monthly': 'MONTHLY',
+
+          //validation
+          'stockNameRequired': 'Please Fill The Stock Name Area.',
+          'stockCodeRequired': 'Please Fill The Stock Code Area.',
+          'usedStockName': 'This Stock Name Has Been Used Before.',
+          'usedStockCode': 'This Stock Code Has Been Used Before.',
+          'snackSave':'Succesfull',
         }
       };
 }
