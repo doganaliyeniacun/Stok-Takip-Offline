@@ -98,10 +98,7 @@ class _NewStockPageState extends State<NewStockPage> {
       function: () {
         if (formState.currentState!.validate()) {
           formState.currentState!.save();
-          _newStockController.getStockList();
-          _newStockController.newStock();
-          _newStockController.clearTextEditing();
-          _newStockController.saveCheck("snackSave");
+          _newStockController.saveFunc();
         }
       },
       color: AppConstant.blueShade200,
