@@ -102,7 +102,12 @@ class StockInOutPage extends StatelessWidget {
             //     formState.currentState!.save();
             //   }
             // },
-            function: () => _stockInOutController.stockIn(),
+            function: () {
+              if (formState.currentState!.validate()) {
+                formState.currentState!.save();
+                _stockInOutController.stockIn();
+              }
+            },
             color: AppConstant.blueShade200,
           ),
         ),
@@ -124,6 +129,11 @@ class StockInOutPage extends StatelessWidget {
       textInputType: TextInputType.number,
       textEditingController: _stockInOutController.row3,
       textInputAction: TextInputAction.done,
+      validator: (value) {
+        if (value.toString().isEmpty) {
+          return "unitRequired".tr;
+        }
+      },
     );
   }
 
@@ -140,14 +150,15 @@ class StockInOutPage extends StatelessWidget {
       children: [
         Expanded(
           child: CustomTextFormField1(
-            name: "code",
-            textInputType: TextInputType.number,
-            textEditingController: _stockInOutController.row1,
-            textInputAction: TextInputAction.next,
-            // validator: (value) =>
-            //     value == "1" ? "Bilinmeyen Stok Kodu" : null,
-            // onSaved: (p0) => print("Kayıt başarılı"),
-          ),
+              name: "code",
+              textInputType: TextInputType.number,
+              textEditingController: _stockInOutController.row1,
+              textInputAction: TextInputAction.next,
+              validator: (value) {
+                if (!_stockInOutController.checkCode(value.toString())) {
+                  return "stockNotFound".tr;
+                }
+              }),
         ),
         Icon(
           Icons.find_replace_sharp,
