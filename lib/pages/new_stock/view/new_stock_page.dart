@@ -111,6 +111,7 @@ class _NewStockPageState extends State<NewStockPage> {
       textInputType: TextInputType.number,
       prefixIcon: Icons.attach_money_sharp,
       textEditingController: _newStockController.row5,
+      textInputAction: TextInputAction.done,
     );
   }
 
@@ -120,6 +121,7 @@ class _NewStockPageState extends State<NewStockPage> {
       textInputType: TextInputType.number,
       prefixIcon: Icons.add_shopping_cart_rounded,
       textEditingController: _newStockController.row4,
+      textInputAction: TextInputAction.next,
     );
   }
 
@@ -129,6 +131,7 @@ class _NewStockPageState extends State<NewStockPage> {
       prefixIcon: Icons.add_circle_outline_outlined,
       textEditingController: _newStockController.row3,
       textInputType: TextInputType.number,
+      textInputAction: TextInputAction.next,
     );
   }
 
@@ -140,6 +143,7 @@ class _NewStockPageState extends State<NewStockPage> {
               name: "code",
               textInputType: TextInputType.text,
               textEditingController: _newStockController.row2,
+              textInputAction: TextInputAction.next,
               validator: (value) {
                 if (_newStockController.checkStockCode(value.toString())) {
                   return "usedStockCode".tr;
@@ -165,6 +169,7 @@ class _NewStockPageState extends State<NewStockPage> {
     return CustomTextFormField1(
       name: "stockName",
       textEditingController: _newStockController.row1,
+      textInputAction: TextInputAction.next,
       validator: (value) {
         if (_newStockController.checkStockName(value.toString())) {
           return "usedStockName".tr;

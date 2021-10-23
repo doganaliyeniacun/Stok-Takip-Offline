@@ -10,6 +10,7 @@ class CustomTextFormField1 extends StatelessWidget {
     this.textEditingController,
     this.textInputType,
     this.prefixIcon,
+    this.textInputAction,
   }) : super(key: key);
 
   final TextEditingController? textEditingController;
@@ -18,6 +19,7 @@ class CustomTextFormField1 extends StatelessWidget {
   final String? Function(String?)? validator;
   final TextInputType? textInputType;
   final IconData? prefixIcon;
+  final TextInputAction? textInputAction;
 
   void Function(String?)? onSaved;
 
@@ -37,6 +39,7 @@ class CustomTextFormField1 extends StatelessWidget {
       controller: textEditingController,
       validator: validator,
       onSaved: onSaved,
+      textInputAction: textInputAction,
     );
   }
 }

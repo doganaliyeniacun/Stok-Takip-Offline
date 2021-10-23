@@ -50,7 +50,7 @@ class StockInOutPage extends StatelessWidget {
                         itemCount: _stockInOutController.list.length,
                         itemBuilder: (context, index) => Center(
                           child: Text(
-                              "stock code: ${_stockInOutController.list[index].stockCode.toString()}  unit :${_stockInOutController.list[index].unit.toString()}"),
+                              "stock code: ${_stockInOutController.list[index].stockCode.toString()}  unit :${_stockInOutController.list[index].unit.toString()}  explanation: ${_stockInOutController.list[index].explanation.toString()}"),
                         ),
                       ),
                     ),
@@ -123,12 +123,15 @@ class StockInOutPage extends StatelessWidget {
       name: "unit",
       textInputType: TextInputType.number,
       textEditingController: _stockInOutController.row3,
+      textInputAction: TextInputAction.done,
     );
   }
 
   CustomTextFormField1 row2() {
     return CustomTextFormField1(
       name: "explanation",
+      textEditingController: _stockInOutController.row2,
+      textInputAction: TextInputAction.next,
     );
   }
 
@@ -140,6 +143,7 @@ class StockInOutPage extends StatelessWidget {
             name: "code",
             textInputType: TextInputType.number,
             textEditingController: _stockInOutController.row1,
+            textInputAction: TextInputAction.next,
             // validator: (value) =>
             //     value == "1" ? "Bilinmeyen Stok Kodu" : null,
             // onSaved: (p0) => print("Kayıt başarılı"),
