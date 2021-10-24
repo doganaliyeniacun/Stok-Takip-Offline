@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:path/path.dart';
 import 'package:stok_takip_offline/components/image_asset.dart';
 import 'package:stok_takip_offline/core/components/banner/top_banner.dart';
 import 'package:stok_takip_offline/core/components/buttons/elevated_button1.dart';
@@ -15,8 +16,11 @@ class StockInOutPage extends StatelessWidget {
 
   StockInOutController _stockInOutController = Get.put(StockInOutController());
 
+  late BuildContext publicContext;
+
   @override
   Widget build(BuildContext context) {
+    publicContext = context;
     return SafeArea(
       child: Scaffold(
         key: scaffold,
@@ -77,7 +81,7 @@ class StockInOutPage extends StatelessWidget {
           child: Column(
             children: [
               SizedBox(height: Get.height * 0.02),
-              row1(),
+              row1(publicContext),
               SizedBox(height: Get.height * 0.02),
               row2(),
               SizedBox(height: Get.height * 0.02),
@@ -145,7 +149,7 @@ class StockInOutPage extends StatelessWidget {
     );
   }
 
-  Row row1() {
+  Row row1(BuildContext context) {
     return Row(
       children: [
         Expanded(
@@ -160,10 +164,15 @@ class StockInOutPage extends StatelessWidget {
                 }
               }),
         ),
-        Icon(
-          Icons.find_replace_sharp,
-          size: 30,
-          color: AppConstant.blueShade200,
+        GestureDetector(
+          onTap: () {
+            searchStock();
+          },
+          child: Icon(
+            Icons.find_replace_sharp,
+            size: 30,
+            color: AppConstant.blueShade200,
+          ),
         ),
         SizedBox(width: Get.width * 0.03),
         Container(
@@ -174,6 +183,123 @@ class StockInOutPage extends StatelessWidget {
           ),
         )
       ],
+    );
+  }
+
+  Future<dynamic> searchStock() {
+    return showDialog(
+      context: publicContext,
+      builder: (context) => AlertDialog(
+        content: Container(
+          height: Get.height * 0.99,
+          width: Get.width * 0.99,
+          decoration: BoxDecoration(
+            border: Border.all(
+              color: AppConstant.blueShade200,
+              width: 3,
+            ),
+            borderRadius: BorderRadius.circular(20),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              children: [
+                CustomTextFormField1(
+                  name: "stockNameOrCode",
+                  textInputType: TextInputType.text,
+                  prefixIcon: Icons.search,
+                  // validator: (value) =>
+                  //     value == "1" ? "Bilinmeyen Stok Kodu" : null,
+                  // onSaved: (p0) => print("Kayıt başarılı"),
+                  textEditingController: _stockInOutController.searchController,
+                  onChanged: (value) =>
+                      _stockInOutController.searchStockList(value.toString()),
+                ),
+                Expanded(
+                  child: Obx(
+                    () => ListView.builder(
+                      itemCount: _stockInOutController.items.length,
+                      itemBuilder: (context, index) {
+                        var list = _stockInOutController.items[index];
+                        return IntrinsicHeight(
+                          child: GestureDetector(
+                            onTap: () {
+                              _stockInOutController.row1.text =
+                                  list.stockCode.toString();
+                  
+                              Get.back();
+                            },
+                            child: Padding(
+                              padding: const EdgeInsets.all(2.0),
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  border: Border.all(
+                                      color: AppConstant.blueShade200),
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child: Column(
+                                  children: [
+                                    Expanded(
+                                      child: Container(
+                                        width: Get.width,
+                                        decoration: const BoxDecoration(
+                                          borderRadius: BorderRadius.vertical(
+                                            top: Radius.circular(10),
+                                          ),
+                                          color: Colors.blue,
+                                        ),
+                                        child: Text(
+                                          "${list.stockName}",
+                                          style: const TextStyle(
+                                            color: Colors.white,
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ),
+                                    Expanded(
+                                      child: Container(
+                                        decoration: const BoxDecoration(
+                                          borderRadius: BorderRadius.vertical(
+                                            bottom: Radius.circular(10),
+                                          ),
+                                          color: Colors.pink,
+                                        ),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceEvenly,
+                                          children: [
+                                            const Text(
+                                              "Stok kodu :",
+                                              style: TextStyle(
+                                                color: Colors.white,
+                                              ),
+                                            ),
+                                            Text(
+                                              "${list.stockCode}",
+                                              style: const TextStyle(
+                                                color: Colors.white,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                )
+              ],
+            ),
+          ),
+        ),
+      ),
     );
   }
 }

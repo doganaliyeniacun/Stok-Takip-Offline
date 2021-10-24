@@ -11,6 +11,7 @@ class CustomTextFormField1 extends StatelessWidget {
     this.textInputType,
     this.prefixIcon,
     this.textInputAction,
+    this.onChanged,
   }) : super(key: key);
 
   final TextEditingController? textEditingController;
@@ -22,6 +23,7 @@ class CustomTextFormField1 extends StatelessWidget {
   final TextInputAction? textInputAction;
 
   void Function(String?)? onSaved;
+  void Function(String?)? onChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -40,6 +42,7 @@ class CustomTextFormField1 extends StatelessWidget {
       validator: validator,
       onSaved: onSaved,
       textInputAction: textInputAction,
+      onChanged: onChanged,
     );
   }
 }

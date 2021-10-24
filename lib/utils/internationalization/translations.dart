@@ -48,6 +48,9 @@ class StokTakipTranlations extends Translations {
           'usedStockCode': 'Bu stok kodu daha önce kullanılmış.',
           'snackSave':'Stok kayededildi',
           'stockNotFound': 'Stok bulunamadı.',
+
+          //search
+          'stockNameOrCode' : 'Stok kodu veya adı.'
         },
         'en_US': {
           'menu1': 'Stock\nIn - Out',
@@ -93,6 +96,9 @@ class StokTakipTranlations extends Translations {
           'usedStockCode': 'This Stock Code Has Been Used Before.',
           'snackSave':'Succesfull',
           'stockNotFound': 'Stock Not Found.',
+
+          //search
+          'stockNameOrCode' : 'Stock Code or Name'
         }
       };
 }
