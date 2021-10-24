@@ -208,9 +208,6 @@ class StockInOutPage extends StatelessWidget {
                   name: "stockNameOrCode",
                   textInputType: TextInputType.text,
                   prefixIcon: Icons.search,
-                  // validator: (value) =>
-                  //     value == "1" ? "Bilinmeyen Stok Kodu" : null,
-                  // onSaved: (p0) => print("Kayıt başarılı"),
                   textEditingController: _stockInOutController.searchController,
                   onChanged: (value) =>
                       _stockInOutController.searchStockList(value.toString()),
@@ -226,7 +223,7 @@ class StockInOutPage extends StatelessWidget {
                             onTap: () {
                               _stockInOutController.row1.text =
                                   list.stockCode.toString();
-                  
+
                               Get.back();
                             },
                             child: Padding(
