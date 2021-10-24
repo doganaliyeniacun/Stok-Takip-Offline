@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:get/get.dart';
 import 'package:stok_takip_offline/components/image_asset.dart';
 import 'package:stok_takip_offline/core/components/banner/top_banner.dart';
@@ -154,11 +156,14 @@ class _NewStockPageState extends State<NewStockPage> {
               }),
         ),
         SizedBox(width: Get.width * 0.02),
-        Container(
-          height: Get.height * 0.05,
-          child: Image.asset(
-            "assets/barcode.png",
-            fit: BoxFit.cover,
+        GestureDetector(
+          onTap: () => scanQR(),
+          child: Container(
+            height: Get.height * 0.05,
+            child: Image.asset(
+              "assets/barcode.png",
+              fit: BoxFit.cover,
+            ),
           ),
         )
       ],
@@ -179,5 +184,22 @@ class _NewStockPageState extends State<NewStockPage> {
         }
       },
     );
+  }
+
+  Future<void> scanQR() async {
+    String barcodeScanRes;
+    // Platform messages may fail, so we use a try/catch PlatformException.
+    try {
+      barcodeScanRes = await FlutterBarcodeScanner.scanBarcode(
+          '#ff6666', 'Cancel', true, ScanMode.BARCODE);
+    } on PlatformException {
+      barcodeScanRes = '';
+    }
+
+    // If the widget was removed from the tree while the asynchronous platform
+    // message was in flight, we want to discard the reply rather than calling
+    // setState to update our non-existent appearance.
+
+    barcodeScanRes != "-1" ?_newStockController.row2.text = barcodeScanRes : barcodeScanRes = "";
   }
 }
