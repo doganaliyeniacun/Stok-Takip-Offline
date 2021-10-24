@@ -1,17 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:get/get.dart';
 import 'package:path/path.dart';
 import 'package:stok_takip_offline/components/image_asset.dart';
+import 'package:stok_takip_offline/components/in_out_search_dialog.dart';
 import 'package:stok_takip_offline/core/components/banner/top_banner.dart';
 import 'package:stok_takip_offline/core/components/buttons/elevated_button1.dart';
 import 'package:stok_takip_offline/core/components/text_form_field/text_form_field1.dart';
 import 'package:stok_takip_offline/pages/stock_in_out/controller/stock_in_out_controller.dart';
 import 'package:stok_takip_offline/utils/const/const.dart';
 
-class StockInOutPage extends StatelessWidget {
+class StockInOutPage extends StatefulWidget {
   StockInOutPage({Key? key}) : super(key: key);
 
+  @override
+  State<StockInOutPage> createState() => _StockInOutPageState();
+}
+
+class _StockInOutPageState extends State<StockInOutPage> {
   GlobalKey<FormState> formState = GlobalKey();
+
   GlobalKey<ScaffoldState> scaffold = GlobalKey();
 
   StockInOutController _stockInOutController = Get.put(StockInOutController());
@@ -166,7 +175,7 @@ class StockInOutPage extends StatelessWidget {
         ),
         GestureDetector(
           onTap: () {
-            searchStock();
+            searchStock(publicContext);
           },
           child: Icon(
             Icons.find_replace_sharp,
@@ -175,128 +184,37 @@ class StockInOutPage extends StatelessWidget {
           ),
         ),
         SizedBox(width: Get.width * 0.03),
-        Container(
-          height: Get.height * 0.05,
-          child: Image.asset(
-            "assets/barcode.png",
-            fit: BoxFit.cover,
+        GestureDetector(
+          onTap: () => scanQR(),
+          child: Container(
+            height: Get.height * 0.05,
+            child: Image.asset(
+              "assets/barcode.png",
+              fit: BoxFit.cover,
+            ),
           ),
         )
       ],
     );
   }
 
-  Future<dynamic> searchStock() {
-    return showDialog(
-      context: publicContext,
-      builder: (context) => AlertDialog(
-        content: Container(
-          height: Get.height * 0.99,
-          width: Get.width * 0.99,
-          decoration: BoxDecoration(
-            border: Border.all(
-              color: AppConstant.blueShade200,
-              width: 3,
-            ),
-            borderRadius: BorderRadius.circular(20),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              children: [
-                CustomTextFormField1(
-                  name: "stockNameOrCode",
-                  textInputType: TextInputType.text,
-                  prefixIcon: Icons.search,
-                  textEditingController: _stockInOutController.searchController,
-                  onChanged: (value) =>
-                      _stockInOutController.searchStockList(value.toString()),
-                ),
-                Expanded(
-                  child: Obx(
-                    () => ListView.builder(
-                      itemCount: _stockInOutController.items.length,
-                      itemBuilder: (context, index) {
-                        var list = _stockInOutController.items[index];
-                        return IntrinsicHeight(
-                          child: GestureDetector(
-                            onTap: () {
-                              _stockInOutController.row1.text =
-                                  list.stockCode.toString();
+  RxString _scanBarcode = 'Unknown'.obs;
 
-                              Get.back();
-                            },
-                            child: Padding(
-                              padding: const EdgeInsets.all(2.0),
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  border: Border.all(
-                                      color: AppConstant.blueShade200),
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                child: Column(
-                                  children: [
-                                    Expanded(
-                                      child: Container(
-                                        width: Get.width,
-                                        decoration: const BoxDecoration(
-                                          borderRadius: BorderRadius.vertical(
-                                            top: Radius.circular(10),
-                                          ),
-                                          color: Colors.blue,
-                                        ),
-                                        child: Text(
-                                          "${list.stockName}",
-                                          style: const TextStyle(
-                                            color: Colors.white,
-                                          ),
-                                          textAlign: TextAlign.center,
-                                        ),
-                                      ),
-                                    ),
-                                    Expanded(
-                                      child: Container(
-                                        decoration: const BoxDecoration(
-                                          borderRadius: BorderRadius.vertical(
-                                            bottom: Radius.circular(10),
-                                          ),
-                                          color: Colors.pink,
-                                        ),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceEvenly,
-                                          children: [
-                                            const Text(
-                                              "Stok kodu :",
-                                              style: TextStyle(
-                                                color: Colors.white,
-                                              ),
-                                            ),
-                                            Text(
-                                              "${list.stockCode}",
-                                              style: const TextStyle(
-                                                color: Colors.white,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
-                        );
-                      },
-                    ),
-                  ),
-                )
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
+  Future<void> scanQR() async {
+    String barcodeScanRes;
+    // Platform messages may fail, so we use a try/catch PlatformException.
+    try {
+      barcodeScanRes = await FlutterBarcodeScanner.scanBarcode(
+          '#ff6666', 'Cancel', true, ScanMode.QR);
+      print(barcodeScanRes);
+    } on PlatformException {
+      barcodeScanRes = 'Failed to get platform version.';
+    }
+
+    // If the widget was removed from the tree while the asynchronous platform
+    // message was in flight, we want to discard the reply rather than calling
+    // setState to update our non-existent appearance.
+
+    _stockInOutController.row1.text = barcodeScanRes;
   }
 }
