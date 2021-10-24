@@ -198,23 +198,22 @@ class _StockInOutPageState extends State<StockInOutPage> {
     );
   }
 
-  RxString _scanBarcode = 'Unknown'.obs;
-
   Future<void> scanQR() async {
     String barcodeScanRes;
     // Platform messages may fail, so we use a try/catch PlatformException.
     try {
       barcodeScanRes = await FlutterBarcodeScanner.scanBarcode(
-          '#ff6666', 'Cancel', true, ScanMode.QR);
-      print(barcodeScanRes);
+          '#ff6666', 'Cancel', true, ScanMode.BARCODE);
     } on PlatformException {
-      barcodeScanRes = 'Failed to get platform version.';
+      barcodeScanRes = '';
     }
 
     // If the widget was removed from the tree while the asynchronous platform
     // message was in flight, we want to discard the reply rather than calling
     // setState to update our non-existent appearance.
 
-    _stockInOutController.row1.text = barcodeScanRes;
+    barcodeScanRes != "-1"
+        ? _stockInOutController.row1.text = barcodeScanRes
+        : barcodeScanRes = "";
   }
 }
