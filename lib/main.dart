@@ -12,6 +12,7 @@ import 'package:stok_takip_offline/pages/report/view/report_page.dart';
 import 'package:stok_takip_offline/pages/stock_delete_update/view/stock_delete_update_page.dart';
 import 'package:stok_takip_offline/pages/stock_in_out/view/stock_in_out.dart';
 import 'package:stok_takip_offline/pages/stock_list/view/stock_list.dart';
+import 'package:stok_takip_offline/pages/stock_update/view/stock_update_page.dart';
 
 import 'package:stok_takip_offline/utils/internationalization/translations.dart';
 
@@ -52,6 +53,7 @@ class _MyAppState extends State<MyApp> {
         GetPage(name: '/menu3', page: () => StockDeleteUpdatePage()),
         GetPage(name: '/menu4', page: () => StockListPage()),
         GetPage(name: '/menu5', page: () => ReportPage()),
+        GetPage(name: '/update', page: () => StockUpdatePage()),
         // GetPage(name: 'menu1', page: () => null, binding: SampleBind()),
       ],
     );
