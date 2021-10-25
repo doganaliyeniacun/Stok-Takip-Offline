@@ -12,10 +12,11 @@ class ReportCard extends StatelessWidget {
     return Card(
       child: Container(
         decoration: BoxDecoration(
-            border: Border.all(
-          color: Colors.blue,
-          width: 4,
-        )),
+          border: Border.all(
+            color: Colors.blue,
+            width: 4,
+          ),
+        ),
         child: IntrinsicHeight(
           child: Column(
             children: [
