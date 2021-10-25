@@ -46,11 +46,13 @@ class StokTakipTranlations extends Translations {
           'unitRequired': 'Lütfen Adet alanını doldurunuz.',
           'usedStockName': 'Bu stok adı daha önce kullanılmış.',
           'usedStockCode': 'Bu stok kodu daha önce kullanılmış.',
-          'snackSave':'Stok kayededildi',
+          'snackSave': 'Stok kayededildi',
           'stockNotFound': 'Stok bulunamadı.',
 
           //search
-          'stockNameOrCode' : 'Stok kodu veya adı.'
+          'stockNameOrCode': 'Stok kodu veya adı.',
+
+          'alert': 'Uyarı!',
         },
         'en_US': {
           'menu1': 'Stock\nIn - Out',
@@ -94,11 +96,13 @@ class StokTakipTranlations extends Translations {
           'unitRequired': 'Please Fill The Unit Area.',
           'usedStockName': 'This Stock Name Has Been Used Before.',
           'usedStockCode': 'This Stock Code Has Been Used Before.',
-          'snackSave':'Succesfull',
+          'snackSave': 'Succesfull',
           'stockNotFound': 'Stock Not Found.',
 
           //search
-          'stockNameOrCode' : 'Stock Code or Name'
+          'stockNameOrCode': 'Stock Code or Name',
+
+          'alert': 'Alert!',
         }
       };
 }
