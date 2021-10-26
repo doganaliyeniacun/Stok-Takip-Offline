@@ -1,11 +1,17 @@
+// ignore_for_file: unnecessary_null_comparison
+
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
+import 'package:stok_takip_offline/database/database_model.dart';
 import 'package:stok_takip_offline/utils/const/const.dart';
 
 class ReportCard extends StatelessWidget {
+  late DatabaseModel list;
+
   ReportCard({
-    Key? key,
-  }) : super(key: key);
+    required this.list,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -38,10 +44,10 @@ class ReportCard extends StatelessWidget {
         children: [
           Expanded(
             child: Container(
-              child: const Text(
-                "30",
+              child: Text(
+                (list.stockIn * list.purchasePrice).toString(),
                 textAlign: TextAlign.center,
-                style: TextStyle(
+                style: const TextStyle(
                   color: Colors.black,
                   fontWeight: FontWeight.bold,
                 ),
@@ -51,10 +57,10 @@ class ReportCard extends StatelessWidget {
           ),
           Expanded(
             child: Container(
-              child: const Text(
-                "0",
+              child: Text(
+                (list.stockOut * list.salePrice).toString(),
                 textAlign: TextAlign.center,
-                style: TextStyle(
+                style: const TextStyle(
                   color: Colors.black,
                   fontWeight: FontWeight.bold,
                 ),
@@ -108,10 +114,10 @@ class ReportCard extends StatelessWidget {
         children: [
           Expanded(
             child: Container(
-              child: const Text(
-                "32",
+              child: Text(
+                list.stockIn.toString(),
                 textAlign: TextAlign.center,
-                style: TextStyle(
+                style: const TextStyle(
                   color: Colors.black,
                   fontWeight: FontWeight.bold,
                 ),
@@ -121,10 +127,10 @@ class ReportCard extends StatelessWidget {
           ),
           Expanded(
             child: Container(
-              child: const Text(
-                "0.0",
+              child: Text(
+                list.stockOut.toString(),
                 textAlign: TextAlign.center,
-                style: TextStyle(
+                style: const TextStyle(
                   color: Colors.black,
                   fontWeight: FontWeight.bold,
                 ),
@@ -178,9 +184,9 @@ class ReportCard extends StatelessWidget {
         color: Colors.white,
         child: Center(
           child: Text(
-            "Stock Name",
+            list.stockName.toString(),
             textAlign: TextAlign.center,
-            style: const TextStyle(
+            style: TextStyle(
               color: Colors.black,
               fontWeight: FontWeight.bold,
             ),

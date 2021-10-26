@@ -3,17 +3,23 @@ class DatabaseModel {
   String? stockName;
   String? stockCode;
   late int unit;
-  double? purchasePrice;
-  double? salePrice;
+  late double purchasePrice;
+  late double salePrice;
   String? explanation;
+  late String updateDate;
+  late int stockIn;
+  late int stockOut;
 
   DatabaseModel({
     this.stockName,
     this.stockCode,
     this.unit = 0,
-    this.purchasePrice,
-    this.salePrice,
+    this.purchasePrice = 0.0,
+    this.salePrice = 0.0,
     this.explanation = "",
+    this.updateDate = "",
+    this.stockIn = 0,
+    this.stockOut = 0,
   });
 
   DatabaseModel.withId({
@@ -21,8 +27,8 @@ class DatabaseModel {
     this.stockName,
     this.stockCode,
     this.unit = 0,
-    this.purchasePrice,
-    this.salePrice,
+    this.purchasePrice = 0.0,
+    this.salePrice = 0.0,
     this.explanation = "",
   });
 
@@ -33,7 +39,9 @@ class DatabaseModel {
     map['unit'] = unit;
     map['purchasePrice'] = purchasePrice;
     map['salePrice'] = salePrice;
-    map['explanation'] = explanation;
+    map['explanation'] = explanation;    
+    map['stockIn'] = stockIn;
+    map['stockOut'] = stockOut;
     return map;
   }
 
@@ -46,6 +54,8 @@ class DatabaseModel {
     map['purchasePrice'] = purchasePrice;
     map['salePrice'] = salePrice;
     map['explanation'] = explanation;
+    map['stockIn'] = stockIn;
+    map['stockOut'] = stockOut;
     return map;
   }
 
@@ -57,5 +67,8 @@ class DatabaseModel {
     purchasePrice = map['purchasePrice'];
     salePrice = map['salePrice'];
     explanation = map['explanation'];
+    updateDate = map['updateDate'];
+    stockIn = map['stockIn'];
+    stockOut = map['stockOut'];
   }
 }

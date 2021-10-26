@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
 
 import 'package:stok_takip_offline/components/report_bottom.dart';
 import 'package:stok_takip_offline/components/report_card.dart';
 import 'package:stok_takip_offline/core/components/banner/top_banner.dart';
 import 'package:stok_takip_offline/core/components/text_form_field/text_form_field1.dart';
+import 'package:stok_takip_offline/pages/report/controller/report_controller.dart';
 import 'package:stok_takip_offline/utils/const/const.dart';
 
 class ReportPage extends StatefulWidget {
@@ -14,10 +16,11 @@ class ReportPage extends StatefulWidget {
   State<ReportPage> createState() => _ReportPageState();
 }
 
-class _ReportPageState extends State<ReportPage>
-    with SingleTickerProviderStateMixin {
+class _ReportPageState extends State<ReportPage> with TickerProviderStateMixin {
   GlobalKey<FormState> formState = GlobalKey();
   GlobalKey<ScaffoldState> scaffold = GlobalKey();
+
+  final ReportController _reportController = Get.put(ReportController());
 
   static List<Tab> myTabs = <Tab>[
     Tab(text: 'daily'.tr),
@@ -67,34 +70,83 @@ class _ReportPageState extends State<ReportPage>
           ),
           Expanded(
             flex: 12,
-            child: reportView(),
+            child: Obx(
+              () => TabBarView(
+                controller: _tabController,
+                children: [
+                  dailyView(),
+                  weeklyView(),
+                  monthlyView(),
+                ],
+              ),
+            ),
           ),
         ],
       ),
     );
   }
 
-  TabBarView reportView() {
-    return TabBarView(
-      controller: _tabController,
-      children: myTabs.map((Tab tab) {
-        final String label = tab.text!.toLowerCase();
-        return Column(
-          children: [
-            Expanded(
-              flex: 6,
-              child: ListView.builder(
-                itemCount: 2,
-                itemBuilder: (context, index) => ReportCard(),
-              ),
+  Column weeklyView() {
+    return Column(
+      children: [
+        Expanded(
+          flex: 6,
+          child: ListView.builder(
+            itemCount: _reportController.listWeek.length,
+            itemBuilder: (context, index) {
+              var list = _reportController.listWeek[index];
+              return ReportCard(list: list);
+            },
+          ),
+        ),
+        Expanded(
+          flex: 1,
+          child: ReportBottom(),
+        ),
+      ],
+    );
+  }
+
+  Column monthlyView() {
+    return Column(
+      children: [
+        Expanded(
+          flex: 6,
+          child: ListView.builder(
+            itemCount: _reportController.listMonth.length,
+            itemBuilder: (context, index) {
+              var list = _reportController.listMonth[index];
+              return ReportCard(list: list);
+            },
+          ),
+        ),
+        Expanded(
+          flex: 1,
+          child: ReportBottom(),
+        ),
+      ],
+    );
+  }
+
+  Column dailyView() {
+    return Column(
+      children: [
+        Expanded(
+          flex: 6,
+          child: ListView.builder(
+              itemCount: _reportController.listNow.length,
+              itemBuilder: (context, index) {
+                var list = _reportController.listNow[index];
+                return ReportCard(list: list);
+              },
             ),
-            Expanded(
-              flex: 1,
-              child: ReportBottom(),
-            ),
-          ],
-        );
-      }).toList(),
+          ),
+        
+        Expanded(
+          flex: 1,
+          child: ReportBottom(),
+        ),
+      ],
     );
   }
 
