@@ -39,7 +39,9 @@ class DatabaseHelper {
         $_columnStockCode text, $_columnUnit integer, 
         $_columnPurchasePrice double, $_columnSalePrice double,
         $_columnExplanation text, $_updateDate DATETIME DEFAULT CURRENT_DATE,
-        $_stockIn integer, $_stockOut integer)''');
+        $_stockIn integer, $_stockOut integer
+        )
+        ''');
   }
 
   //get value
@@ -66,12 +68,23 @@ class DatabaseHelper {
     String end,
   ) async {
     Database? db = await this.database;
-    var result = await db!.query("$_notesTable");
-        // where: "updateDate between ? and ?", whereArgs: [begin, end]);
+    var result = await db!.query("$_notesTable",
+        where: "updateDate between ? and ?", whereArgs: [begin, end]);
     return List.generate(result.length, (i) {
       return DatabaseModel.fromMap(result[i]);
     });
   }
+
+// Future<List<DatabaseModel>> getAllStockWhereUpdateDate(
+//     String begin,
+//     String end,
+//   ) async {
+//     Database? db = await this.database;
+//     var result = await db!.rawQuery("select * from stock where updateDate between '10.10.2021' and '26.10.2021' ");
+//     return List.generate(result.length, (i) {
+//       return DatabaseModel.fromMap(result[i]);
+//     });
+//   }
 
   //insert
   Future<int> insert(DatabaseModel databaseModel) async {

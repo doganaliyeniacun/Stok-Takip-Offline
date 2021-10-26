@@ -70,11 +70,16 @@ class _ReportPageState extends State<ReportPage> with TickerProviderStateMixin {
           ),
           Expanded(
             flex: 12,
-            child: TabBarView(controller: _tabController, children: [
-              dailyView(),
-              weeklyView(),
-              monthlyView(),
-            ]),
+            child: Obx(
+              () => TabBarView(
+                controller: _tabController,
+                children: [
+                  dailyView(),
+                  weeklyView(),
+                  monthlyView(),
+                ],
+              ),
+            ),
           ),
         ],
       ),
@@ -87,9 +92,10 @@ class _ReportPageState extends State<ReportPage> with TickerProviderStateMixin {
         Expanded(
           flex: 6,
           child: ListView.builder(
-            itemCount: 2,
+            itemCount: _reportController.listWeek.length,
             itemBuilder: (context, index) {
-              return ReportCard();
+              var list = _reportController.listWeek[index];
+              return ReportCard(list: list);
             },
           ),
         ),
@@ -107,9 +113,10 @@ class _ReportPageState extends State<ReportPage> with TickerProviderStateMixin {
         Expanded(
           flex: 6,
           child: ListView.builder(
-            itemCount: 2,
+            itemCount: _reportController.listMonth.length,
             itemBuilder: (context, index) {
-              return ReportCard();
+              var list = _reportController.listMonth[index];
+              return ReportCard(list: list);
             },
           ),
         ),
@@ -126,17 +133,15 @@ class _ReportPageState extends State<ReportPage> with TickerProviderStateMixin {
       children: [
         Expanded(
           flex: 6,
-          child: Obx(
-            () => ListView.builder(
+          child: ListView.builder(
               itemCount: _reportController.listNow.length,
               itemBuilder: (context, index) {
                 var list = _reportController.listNow[index];
-                // return ReportCard();
-                return Center(child: Text(list.updateDate.toString()));
+                return ReportCard(list: list);
               },
             ),
           ),
-        ),
+        
         Expanded(
           flex: 1,
           child: ReportBottom(),

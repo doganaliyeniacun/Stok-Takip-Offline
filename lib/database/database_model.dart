@@ -39,8 +39,7 @@ class DatabaseModel {
     map['unit'] = unit;
     map['purchasePrice'] = purchasePrice;
     map['salePrice'] = salePrice;
-    map['explanation'] = explanation;
-    map['updateDate'] = updateDate;
+    map['explanation'] = explanation;    
     map['stockIn'] = stockIn;
     map['stockOut'] = stockOut;
     return map;
@@ -55,7 +54,6 @@ class DatabaseModel {
     map['purchasePrice'] = purchasePrice;
     map['salePrice'] = salePrice;
     map['explanation'] = explanation;
-    map['updateDate'] = updateDate;
     map['stockIn'] = stockIn;
     map['stockOut'] = stockOut;
     return map;
