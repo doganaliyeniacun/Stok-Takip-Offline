@@ -21,6 +21,7 @@ class NewStockController extends GetxController {
         stockName: row1.text,
         stockCode: row2.text,
         unit: row3.text.isEmpty ? 0 : int.parse(row3.text),
+        stockIn: row3.text.isEmpty ? 0 : int.parse(row3.text),
         purchasePrice: row4.text.isEmpty ? 0.0 : double.parse(row4.text),
         salePrice: row5.text.isEmpty ? 0.0 : double.parse(row5.text),
       ),

@@ -40,8 +40,16 @@ class DatabaseHelper {
         $_columnPurchasePrice double, $_columnSalePrice double,
         $_columnExplanation text, $_updateDate DATETIME DEFAULT CURRENT_DATE,
         $_stockIn integer, $_stockOut integer
-        )
+        )        
         ''');
+
+    await db.execute('''      
+        CREATE TRIGGER updateDate AFTER UPDATE
+        ON $_notesTable
+        BEGIN
+          update stock set updateDate = Date('now') where id = old.id;
+        END
+        ''');    
   }
 
   //get value
@@ -124,21 +132,23 @@ class DatabaseHelper {
     UPDATE 
       $_notesTable 
     SET 
-      $_columnUnit = $_columnUnit + ?
-      ,$_columnExplanation = ?
+      $_columnUnit = $_columnUnit + ?,
+      $_stockIn = $_stockIn + ?,
+      $_columnExplanation = ?
     WHERE 
       $_columnID = ?
     ''',
-            [unit, explanation, id],
+            [unit, unit, explanation, id],
           )
         : await db!.rawUpdate('''
     UPDATE 
       $_notesTable 
     SET 
-      $_columnUnit = $_columnUnit + ?     
+      $_columnUnit = $_columnUnit + ?,
+      $_stockIn = $_stockIn + ?     
     WHERE 
       $_columnID = ?
-    ''', [unit, id]);
+    ''', [unit, unit, id]);
     return updateCount;
   }
 
@@ -151,20 +161,22 @@ class DatabaseHelper {
       $_notesTable 
     SET 
       $_columnUnit = $_columnUnit - ?
-      ,$_columnExplanation = ?
+      $_stockOut = $_stockOut + ?,
+      $_columnExplanation = ?
     WHERE 
       $_columnID = ?
     ''',
-            [unit, explanation, id],
+            [unit, unit, explanation, id],
           )
         : await db!.rawUpdate('''
     UPDATE 
       $_notesTable 
     SET 
-      $_columnUnit = $_columnUnit - ?     
+      $_columnUnit = $_columnUnit - ?,
+      $_stockOut = $_stockOut + ?     
     WHERE 
       $_columnID = ?
-    ''', [unit, id]);
+    ''', [unit, unit, id]);
     return updateCount;
   }
 }

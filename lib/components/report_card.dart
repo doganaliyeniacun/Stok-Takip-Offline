@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_null_comparison
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
@@ -42,10 +44,10 @@ class ReportCard extends StatelessWidget {
         children: [
           Expanded(
             child: Container(
-              child: const Text(
-                "30",
+              child: Text(
+                (list.stockIn * list.purchasePrice).toString(),
                 textAlign: TextAlign.center,
-                style: TextStyle(
+                style: const TextStyle(
                   color: Colors.black,
                   fontWeight: FontWeight.bold,
                 ),
@@ -55,10 +57,10 @@ class ReportCard extends StatelessWidget {
           ),
           Expanded(
             child: Container(
-              child: const Text(
-                "0",
+              child: Text(
+                (list.stockOut * list.salePrice).toString(),
                 textAlign: TextAlign.center,
-                style: TextStyle(
+                style: const TextStyle(
                   color: Colors.black,
                   fontWeight: FontWeight.bold,
                 ),
@@ -113,7 +115,7 @@ class ReportCard extends StatelessWidget {
           Expanded(
             child: Container(
               child: Text(
-                list.unit.toString(),
+                list.stockIn.toString(),
                 textAlign: TextAlign.center,
                 style: const TextStyle(
                   color: Colors.black,
@@ -125,10 +127,10 @@ class ReportCard extends StatelessWidget {
           ),
           Expanded(
             child: Container(
-              child: const Text(
-                "0.0",
+              child: Text(
+                list.stockOut.toString(),
                 textAlign: TextAlign.center,
-                style: TextStyle(
+                style: const TextStyle(
                   color: Colors.black,
                   fontWeight: FontWeight.bold,
                 ),

@@ -3,23 +3,23 @@ class DatabaseModel {
   String? stockName;
   String? stockCode;
   late int unit;
-  double? purchasePrice;
-  double? salePrice;
+  late double purchasePrice;
+  late double salePrice;
   String? explanation;
   late String updateDate;
-  String? stockIn;
-  String? stockOut;
+  late int stockIn;
+  late int stockOut;
 
   DatabaseModel({
     this.stockName,
     this.stockCode,
     this.unit = 0,
-    this.purchasePrice,
-    this.salePrice,
+    this.purchasePrice = 0.0,
+    this.salePrice = 0.0,
     this.explanation = "",
     this.updateDate = "",
-    this.stockIn,
-    this.stockOut,
+    this.stockIn = 0,
+    this.stockOut = 0,
   });
 
   DatabaseModel.withId({
@@ -27,8 +27,8 @@ class DatabaseModel {
     this.stockName,
     this.stockCode,
     this.unit = 0,
-    this.purchasePrice,
-    this.salePrice,
+    this.purchasePrice = 0.0,
+    this.salePrice = 0.0,
     this.explanation = "",
   });
 
