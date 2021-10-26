@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
+import 'package:stok_takip_offline/database/database_model.dart';
 import 'package:stok_takip_offline/utils/const/const.dart';
 
 class ReportCard extends StatelessWidget {
+  late DatabaseModel? databaseModel;
+
   ReportCard({
-    Key? key,
-  }) : super(key: key);
+    this.databaseModel,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -176,11 +179,11 @@ class ReportCard extends StatelessWidget {
     return Expanded(
       child: Container(
         color: Colors.white,
-        child: Center(
+        child: const Center(
           child: Text(
             "Stock Name",
             textAlign: TextAlign.center,
-            style: const TextStyle(
+            style: TextStyle(
               color: Colors.black,
               fontWeight: FontWeight.bold,
             ),

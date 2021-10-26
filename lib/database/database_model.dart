@@ -6,6 +6,9 @@ class DatabaseModel {
   double? purchasePrice;
   double? salePrice;
   String? explanation;
+  late String updateDate;
+  String? stockIn;
+  String? stockOut;
 
   DatabaseModel({
     this.stockName,
@@ -14,6 +17,9 @@ class DatabaseModel {
     this.purchasePrice,
     this.salePrice,
     this.explanation = "",
+    this.updateDate = "",
+    this.stockIn,
+    this.stockOut,
   });
 
   DatabaseModel.withId({
@@ -34,6 +40,9 @@ class DatabaseModel {
     map['purchasePrice'] = purchasePrice;
     map['salePrice'] = salePrice;
     map['explanation'] = explanation;
+    map['updateDate'] = updateDate;
+    map['stockIn'] = stockIn;
+    map['stockOut'] = stockOut;
     return map;
   }
 
@@ -46,6 +55,9 @@ class DatabaseModel {
     map['purchasePrice'] = purchasePrice;
     map['salePrice'] = salePrice;
     map['explanation'] = explanation;
+    map['updateDate'] = updateDate;
+    map['stockIn'] = stockIn;
+    map['stockOut'] = stockOut;
     return map;
   }
 
@@ -57,5 +69,8 @@ class DatabaseModel {
     purchasePrice = map['purchasePrice'];
     salePrice = map['salePrice'];
     explanation = map['explanation'];
+    updateDate = map['updateDate'];
+    stockIn = map['stockIn'];
+    stockOut = map['stockOut'];
   }
 }

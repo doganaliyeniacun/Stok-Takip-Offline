@@ -13,6 +13,9 @@ class DatabaseHelper {
   final String _columnPurchasePrice = "purchasePrice";
   final String _columnSalePrice = "salePrice";
   final String _columnExplanation = "explanation";
+  final String _updateDate = "updateDate";
+  final String _stockIn = "stockIn";
+  final String _stockOut = "stockOut";
 
   Future<Database?> get database async {
     _database == null
@@ -35,8 +38,8 @@ class DatabaseHelper {
         $_columnID integer primary key, $_columnStockName text, 
         $_columnStockCode text, $_columnUnit integer, 
         $_columnPurchasePrice double, $_columnSalePrice double,
-        $_columnExplanation text
-        )''');
+        $_columnExplanation text, $_updateDate DATETIME DEFAULT CURRENT_DATE,
+        $_stockIn integer, $_stockOut integer)''');
   }
 
   //get value
@@ -48,9 +51,23 @@ class DatabaseHelper {
     });
   }
 
-  Future<List<DatabaseModel>> getAllStockOrderBy({String? orderBy = "asc"}) async {
+  Future<List<DatabaseModel>> getAllStockOrderBy(
+      {String? orderBy = "asc"}) async {
     Database? db = await this.database;
-    var result = await db!.query("$_notesTable", orderBy: "$_columnStockName $orderBy");
+    var result =
+        await db!.query("$_notesTable", orderBy: "$_columnStockName $orderBy");
+    return List.generate(result.length, (i) {
+      return DatabaseModel.fromMap(result[i]);
+    });
+  }
+
+  Future<List<DatabaseModel>> getAllStockWhereUpdateDate(
+    String begin,
+    String end,
+  ) async {
+    Database? db = await this.database;
+    var result = await db!.query("$_notesTable");
+        // where: "updateDate between ? and ?", whereArgs: [begin, end]);
     return List.generate(result.length, (i) {
       return DatabaseModel.fromMap(result[i]);
     });

@@ -62,8 +62,12 @@ class _StockInOutPageState extends State<StockInOutPage> {
                       () => ListView.builder(
                         itemCount: _stockInOutController.list.length,
                         itemBuilder: (context, index) => Center(
-                          child: Text(
-                              "stock code: ${_stockInOutController.list[index].stockCode.toString()}  unit :${_stockInOutController.list[index].unit.toString()}  explanation: ${_stockInOutController.list[index].explanation.toString()}"),
+                          child: GestureDetector(
+                            onTap: () => print(
+                                _stockInOutController.list[index].updateDate),
+                            child: Text(
+                                "stock code: ${_stockInOutController.list[index].stockCode.toString()}  unit :${_stockInOutController.list[index].unit.toString()}  explanation: ${_stockInOutController.list[index].explanation.toString()} updateDate: ${_stockInOutController.list[index].updateDate.toString()}"),
+                          ),
                         ),
                       ),
                     ),
