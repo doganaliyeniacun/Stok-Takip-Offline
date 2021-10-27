@@ -138,6 +138,11 @@ class _StockUpdatePageState extends State<StockUpdatePage> {
       textEditingController: _stockUpdateController.row3,
       textInputType: TextInputType.number,
       textInputAction: TextInputAction.next,
+      validator: (value) {
+        if (_stockUpdateController.checkUnitValue(value.toString())) {
+          return "zero".tr;
+        }
+      },
     );
   }
 

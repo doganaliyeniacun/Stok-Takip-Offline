@@ -132,7 +132,12 @@ class _StockInOutPageState extends State<StockInOutPage> {
         Expanded(
           child: CustomElevatedButton1(
             name: "out",
-            function: () => _stockInOutController.stockOut(),
+            function:  () {
+              if (formState.currentState!.validate()) {
+                formState.currentState!.save();
+                _stockInOutController.stockOut();
+              }
+            },
             color: AppConstant.blueShade200,
           ),
         ),
@@ -150,7 +155,7 @@ class _StockInOutPageState extends State<StockInOutPage> {
         if (value.toString().isEmpty) {
           return "unitRequired".tr;
         }else if(_stockInOutController.checkUnitValue(value.toString())){
-          return "0 dan küçük olamaz";
+          return "zero".tr;
         }
         // else if(){
         //   return "0 dan küçük olamaz.";

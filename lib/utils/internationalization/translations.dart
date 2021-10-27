@@ -48,6 +48,7 @@ class StokTakipTranlations extends Translations {
           'usedStockCode': 'Bu stok kodu daha önce kullanılmış.',
           'snackSave': 'Stok kaydedildi.',
           'stockNotFound': 'Stok bulunamadı.',
+          'zero' : 'Sıfırdan küçük olamaz!',
 
           //search
           'stockNameOrCode': 'Stok kodu veya adı.',
@@ -98,11 +99,13 @@ class StokTakipTranlations extends Translations {
           'usedStockCode': 'This Stock Code Has Been Used Before.',
           'snackSave': 'Succesfull',
           'stockNotFound': 'Stock Not Found.',
+          'zero' : 'Cannot be less than zero!',
 
           //search
           'stockNameOrCode': 'Stock Code or Name',
 
           'alert': 'Alert!',
+          
         }
       };
 }

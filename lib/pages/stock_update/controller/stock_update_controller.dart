@@ -67,7 +67,7 @@ class StockUpdateController extends GetxController {
     );
   }
 
-  checkUnit() {    
+  checkUnit() {
     bool check = false;
     int unit = 0;
     int stockIn = 0;
@@ -84,7 +84,15 @@ class StockUpdateController extends GetxController {
         }
       }
     }
+  }
 
+  bool checkUnitValue(String value) {
+    bool check = false;
+    // list.where((value) => value.stockCode.toString().contains(code));
+    if (0 > int.parse(value)) {
+      check = true;
+    }
+    return check;
   }
 
   bool checkStockName(String name) {

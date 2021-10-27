@@ -85,6 +85,8 @@ class StockDeleteUpdateController extends GetxController {
     }
   }
 
+  
+
   bool checkCode(String code) {
     bool check = false;
     // list.where((value) => value.stockCode.toString().contains(code));
