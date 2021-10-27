@@ -95,7 +95,7 @@ class StockInOutController extends GetxController {
 
   bool checkUnitValue(String value) {
     bool check = false;
-    
+
     // list.where((value) => value.stockCode.toString().contains(code));
     if (0 > int.parse(value)) {
       check = true;
@@ -107,6 +107,23 @@ class StockInOutController extends GetxController {
     //     check = true;
     //   }
     // }
+    return check;
+  }
+
+  bool check = false;
+
+  bool checkOut() {
+    check = false;
+    for (var item in list) {
+      int total = 0;
+      total += item.unit - int.parse(row3.text);
+      if (total < 0 && item.stockCode == row1.text) {
+        check = true;
+      }
+      print(total.toString());
+    }
+
+    print(check);
     return check;
   }
 
