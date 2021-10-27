@@ -49,7 +49,7 @@ class DatabaseHelper {
         BEGIN
           update stock set updateDate = Date('now') where id = old.id;
         END
-        ''');    
+        ''');
   }
 
   //get value
@@ -102,10 +102,35 @@ class DatabaseHelper {
   }
 
   //update
+  // Future<int> update(DatabaseModel databaseModel, int id) async {
+  //   Database? db = await this.database;
+  //   var result = await db!.update("$_notesTable", databaseModel.toMap(),
+  //       where: "id=?", whereArgs: [id]);
+  //   return result;
+  // }
+
   Future<int> update(DatabaseModel databaseModel, int id) async {
     Database? db = await this.database;
-    var result = await db!.update("$_notesTable", databaseModel.toMap(),
-        where: "id=?", whereArgs: [id]);
+    var result = await db!.rawUpdate('''
+    update 
+      stock 
+    set 
+      $_columnStockName = ?, 
+      $_columnStockCode = ?,
+      $_columnUnit = ?,
+      $_columnPurchasePrice = ?,
+      $_columnSalePrice = ?,
+      $_stockIn = ?
+    where id = ?
+    ''', [
+      databaseModel.stockName,
+      databaseModel.stockCode,
+      databaseModel.unit,
+      databaseModel.purchasePrice,
+      databaseModel.salePrice,
+      databaseModel.stockIn,
+      id
+    ]);
     return result;
   }
 

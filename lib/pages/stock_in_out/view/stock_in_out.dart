@@ -120,9 +120,10 @@ class _StockInOutPageState extends State<StockInOutPage> {
             //   }
             // },
             function: () {
+              _stockInOutController.check = false;
               if (formState.currentState!.validate()) {
                 formState.currentState!.save();
-                _stockInOutController.stockIn();
+                _stockInOutController.stockIn();                
               }
             },
             color: AppConstant.blueShade200,
@@ -132,7 +133,13 @@ class _StockInOutPageState extends State<StockInOutPage> {
         Expanded(
           child: CustomElevatedButton1(
             name: "out",
-            function: () => _stockInOutController.stockOut(),
+            function: () {
+              _stockInOutController.checkOut();
+              if (formState.currentState!.validate()) {
+                formState.currentState!.save();
+                _stockInOutController.stockOut();
+              }
+            },
             color: AppConstant.blueShade200,
           ),
         ),
@@ -142,16 +149,21 @@ class _StockInOutPageState extends State<StockInOutPage> {
 
   CustomTextFormField1 row3() {
     return CustomTextFormField1(
-      name: "unit",
-      textInputType: TextInputType.number,
-      textEditingController: _stockInOutController.row3,
-      textInputAction: TextInputAction.done,
-      validator: (value) {
-        if (value.toString().isEmpty) {
-          return "unitRequired".tr;
-        }
-      },
-    );
+        name: "unit",
+        textInputType: TextInputType.number,
+        textEditingController: _stockInOutController.row3,
+        textInputAction: TextInputAction.done,
+        validator: (value) {
+          if (value.toString().isEmpty) {
+            return "unitRequired".tr;
+          } else if (_stockInOutController.checkUnitValue(value.toString()) ||
+              _stockInOutController.check) {
+            return "zero".tr;
+          }
+          // else if(){
+          //   return "0 dan küçük olamaz.";
+          // }
+        });
   }
 
   CustomTextFormField1 row2() {

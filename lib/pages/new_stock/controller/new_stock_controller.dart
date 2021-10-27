@@ -28,6 +28,8 @@ class NewStockController extends GetxController {
     );
   }
 
+  
+
   void initTextCont() {
     row1 = TextEditingController();
     row2 = TextEditingController();

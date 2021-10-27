@@ -2,13 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:get/get.dart';
-import 'package:path/path.dart';
+
 import 'package:stok_takip_offline/components/delete_update_search.dart';
 import 'package:stok_takip_offline/components/image_asset.dart';
 import 'package:stok_takip_offline/core/components/banner/top_banner.dart';
 import 'package:stok_takip_offline/core/components/buttons/elevated_button1.dart';
 import 'package:stok_takip_offline/core/components/text_form_field/text_form_field1.dart';
 import 'package:stok_takip_offline/pages/stock_delete_update/controller/stock_delete_update_controller.dart';
+
 import 'package:stok_takip_offline/utils/const/const.dart';
 
 class StockDeleteUpdatePage extends StatelessWidget {
@@ -21,6 +22,7 @@ class StockDeleteUpdatePage extends StatelessWidget {
 
   final StockDeleteUpdateController _stockDeleteUpdateController =
       Get.put(StockDeleteUpdateController());
+ 
 
   @override
   Widget build(BuildContext context) {
