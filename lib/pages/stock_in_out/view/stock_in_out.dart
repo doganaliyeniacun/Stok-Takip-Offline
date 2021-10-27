@@ -5,9 +5,11 @@ import 'package:get/get.dart';
 import 'package:path/path.dart';
 import 'package:stok_takip_offline/components/image_asset.dart';
 import 'package:stok_takip_offline/components/in_out_search_dialog.dart';
+import 'package:stok_takip_offline/components/list_item.dart';
 import 'package:stok_takip_offline/core/components/banner/top_banner.dart';
 import 'package:stok_takip_offline/core/components/buttons/elevated_button1.dart';
 import 'package:stok_takip_offline/core/components/text_form_field/text_form_field1.dart';
+import 'package:stok_takip_offline/database/database_model.dart';
 import 'package:stok_takip_offline/pages/stock_in_out/controller/stock_in_out_controller.dart';
 import 'package:stok_takip_offline/utils/const/const.dart';
 
@@ -23,7 +25,7 @@ class _StockInOutPageState extends State<StockInOutPage> {
 
   GlobalKey<ScaffoldState> scaffold = GlobalKey();
 
-  StockInOutController _stockInOutController = Get.put(StockInOutController());
+  final StockInOutController _stockInOutController = Get.put(StockInOutController());
 
   late BuildContext publicContext;
 
@@ -59,17 +61,10 @@ class _StockInOutPageState extends State<StockInOutPage> {
                   child: Container(
                     height: Get.height * 0.10,
                     child: Obx(
-                      () => ListView.builder(
-                        itemCount: _stockInOutController.list.length,
-                        itemBuilder: (context, index) => Center(
-                          child: GestureDetector(
-                            onTap: () => print(
-                                _stockInOutController.list[index].updateDate),
-                            child: Text(
-                                "stock code: ${_stockInOutController.list[index].stockCode.toString()}  unit :${_stockInOutController.list[index].unit.toString()}  explanation: ${_stockInOutController.list[index].explanation.toString()} updateDate: ${_stockInOutController.list[index].updateDate.toString()}"),
-                          ),
-                        ),
-                      ),
+                      () =>
+                          _stockInOutController.checkListItem.value
+                              ? ListItem(_stockInOutController.itemList.value)
+                              : CenterImage(),
                     ),
                   ),
                 ),
@@ -123,7 +118,8 @@ class _StockInOutPageState extends State<StockInOutPage> {
               _stockInOutController.check = false;
               if (formState.currentState!.validate()) {
                 formState.currentState!.save();
-                _stockInOutController.stockIn();                
+                _stockInOutController.stockIn();
+                _stockInOutController.checkListItem.value = false;
               }
             },
             color: AppConstant.blueShade200,
@@ -138,6 +134,7 @@ class _StockInOutPageState extends State<StockInOutPage> {
               if (formState.currentState!.validate()) {
                 formState.currentState!.save();
                 _stockInOutController.stockOut();
+                _stockInOutController.checkListItem.value = false;
               }
             },
             color: AppConstant.blueShade200,
