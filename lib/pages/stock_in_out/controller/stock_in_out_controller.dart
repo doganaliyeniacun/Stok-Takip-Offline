@@ -93,6 +93,20 @@ class StockInOutController extends GetxController {
     return check;
   }
 
+  bool checkUnitValue(String value) {
+    bool check = false;
+    // list.where((value) => value.stockCode.toString().contains(code));
+    if (0 > int.parse(value)) {
+      check = true;
+    }
+
+    for (var item in list) {
+         
+    }
+
+    return check;
+  }
+
   int getId(String code) {
     late int id;
     for (var element in list.value) {

@@ -149,8 +149,13 @@ class _StockInOutPageState extends State<StockInOutPage> {
       validator: (value) {
         if (value.toString().isEmpty) {
           return "unitRequired".tr;
+        }else if(_stockInOutController.checkUnitValue(value.toString())){
+          return "0 dan küçük olamaz";
         }
-      },
+        // else if(){
+        //   return "0 dan küçük olamaz.";
+        // }
+      }
     );
   }
 

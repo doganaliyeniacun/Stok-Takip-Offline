@@ -46,7 +46,7 @@ class StokTakipTranlations extends Translations {
           'unitRequired': 'Lütfen Adet alanını doldurunuz.',
           'usedStockName': 'Bu stok adı daha önce kullanılmış.',
           'usedStockCode': 'Bu stok kodu daha önce kullanılmış.',
-          'snackSave': 'Stok kayededildi',
+          'snackSave': 'Stok kaydedildi.',
           'stockNotFound': 'Stok bulunamadı.',
 
           //search

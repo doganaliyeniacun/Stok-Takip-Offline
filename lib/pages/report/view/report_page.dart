@@ -101,7 +101,7 @@ class _ReportPageState extends State<ReportPage> with TickerProviderStateMixin {
         ),
         Expanded(
           flex: 1,
-          child: ReportBottom(),
+          child: ReportBottom(list:_reportController.listWeek),
         ),
       ],
     );
@@ -122,7 +122,7 @@ class _ReportPageState extends State<ReportPage> with TickerProviderStateMixin {
         ),
         Expanded(
           flex: 1,
-          child: ReportBottom(),
+          child: ReportBottom(list:_reportController.listMonth),
         ),
       ],
     );
@@ -144,7 +144,7 @@ class _ReportPageState extends State<ReportPage> with TickerProviderStateMixin {
         
         Expanded(
           flex: 1,
-          child: ReportBottom(),
+          child: ReportBottom(list:_reportController.listNow),
         ),
       ],
     );

@@ -46,17 +46,11 @@ class StockUpdateController extends GetxController {
   }
 
   void saveFunc() {
-    _updateRows();
     _getStockList();
+    _updateRows();
     _clearTextEditing();
-    _stockDleteUpdateControllerOperations();
     Get.back();
     saveCheck("snackSave");
-  }
-
-  void _stockDleteUpdateControllerOperations() {
-    // stockDeleteUpdateController.getAllData();
-    // stockDeleteUpdateController.row1.clear();
   }
 
   void _updateRows() {
@@ -67,13 +61,35 @@ class StockUpdateController extends GetxController {
         unit: int.parse(row3.text),
         purchasePrice: double.parse(row4.text),
         salePrice: double.parse(row5.text),
+        stockIn: checkUnit(),
       ),
       id,
     );
   }
 
+  checkUnit() {    
+    bool check = false;
+    int unit = 0;
+    int stockIn = 0;
+
+    for (var item in stockList) {
+      check = item.stockIn < int.parse(row3.text);
+      if (item.id == id) {
+        if (check) {
+          unit += item.stockIn + (int.parse(row3.text) - item.stockIn);
+          return unit;
+        } else {
+          stockIn = int.parse(row3.text);
+          return stockIn;
+        }
+      }
+    }
+
+  }
+
   bool checkStockName(String name) {
     bool check = false;
+
     for (var element in stockList) {
       if (name.isNotEmpty) {
         if (element.stockName.toString().contains(name) && element.id == id) {

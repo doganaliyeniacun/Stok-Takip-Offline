@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
+import 'package:stok_takip_offline/database/database_helper.dart';
+import 'package:stok_takip_offline/database/database_model.dart';
+import 'package:stok_takip_offline/pages/report/controller/report_controller.dart';
 import 'package:stok_takip_offline/utils/const/const.dart';
 
 class ReportBottom extends StatelessWidget {
-  ReportBottom({
-    Key? key,
-  }) : super(key: key);
+  final ReportController _reportController = Get.put(ReportController());
+  RxList<DatabaseModel> list;
+
+  ReportBottom({required this.list});
 
   @override
   Widget build(BuildContext context) {
@@ -61,10 +66,12 @@ class ReportBottom extends StatelessWidget {
             children: [
               Expanded(
                 child: Container(
-                  child: const Text(
-                    "32",
+                  child: Text(
+                    _reportController
+                        .outgoingMoney(list)
+                        .toString(),
                     textAlign: TextAlign.center,
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Colors.black,
                       fontWeight: FontWeight.bold,
                     ),
@@ -74,10 +81,12 @@ class ReportBottom extends StatelessWidget {
               ),
               Expanded(
                 child: Container(
-                  child: const Text(
-                    "0.0",
+                  child: Text(
+                    _reportController
+                        .incomingMoney(_reportController.listNow)
+                        .toString(),
                     textAlign: TextAlign.center,
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Colors.black,
                       fontWeight: FontWeight.bold,
                     ),
@@ -106,10 +115,12 @@ class ReportBottom extends StatelessWidget {
               ),
               Expanded(
                 child: Container(
-                  child: const Text(
-                    "-32.0",
+                  child: Text(
+                    _reportController
+                        .balance(_reportController.listNow)
+                        .toString(),
                     textAlign: TextAlign.center,
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Colors.black,
                       fontWeight: FontWeight.bold,
                     ),
