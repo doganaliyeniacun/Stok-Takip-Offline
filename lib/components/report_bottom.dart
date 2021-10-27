@@ -8,7 +8,7 @@ import 'package:stok_takip_offline/utils/const/const.dart';
 
 class ReportBottom extends StatelessWidget {
   final ReportController _reportController = Get.put(ReportController());
-  final RxList<DatabaseModel> list;
+  final List<DatabaseModel> list;
 
   ReportBottom({required this.list});
 
@@ -94,37 +94,35 @@ class ReportBottom extends StatelessWidget {
 
   Expanded row3() {
     return Expanded(
-      child: Obx(
-        () => Row(
-          children: [
-            Expanded(
-              child: Container(
-                child: Text(
-                  _reportController.outgoingMoney(list).toString(),
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(
-                    color: Colors.black,
-                    fontWeight: FontWeight.bold,
-                  ),
+      child: Row(
+        children: [
+          Expanded(
+            child: Container(
+              child: Text(
+                _reportController.outgoingMoney(list).toString(),
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
                 ),
-                color: Colors.white,
               ),
+              color: Colors.white,
             ),
-            Expanded(
-              child: Container(
-                child: Text(
-                  _reportController.incomingMoney(list).toString(),
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(
-                    color: Colors.black,
-                    fontWeight: FontWeight.bold,
-                  ),
+          ),
+          Expanded(
+            child: Container(
+              child: Text(
+                _reportController.incomingMoney(list).toString(),
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
                 ),
-                color: Colors.white,
               ),
+              color: Colors.white,
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
