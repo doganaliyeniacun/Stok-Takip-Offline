@@ -23,6 +23,9 @@ class PieChart extends StatelessWidget {
     Colors.pink,
   ];
 
+  double outgoingMoney() => _reportController.outgoingMoney(list);
+  double incomingMoney() => _reportController.incomingMoney(list);
+
   @override
   Widget build(BuildContext context) {
     return SfCircularChart(
@@ -32,8 +35,8 @@ class PieChart extends StatelessWidget {
           dataSource: name,
           xValueMapper: (datum, index) => name[index],
           yValueMapper: (datum, index) => [
-            _reportController.outgoingMoney(list),
-            _reportController.incomingMoney(list)
+            outgoingMoney(),
+            incomingMoney(),
           ][index],
           pointColorMapper: (datum, index) => color[index],
           dataLabelSettings: const DataLabelSettings(isVisible: true),
