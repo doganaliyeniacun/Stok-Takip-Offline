@@ -73,6 +73,7 @@ class MainPage extends GetView<InitTranslations> {
         CustomMenuCard1(
           name: "menu6",
           color: AppConstant.blueShade200,
+          function: () => Get.toNamed("/menu6"),
         ),
       ],
     );
