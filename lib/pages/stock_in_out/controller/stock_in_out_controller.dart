@@ -9,6 +9,9 @@ class StockInOutController extends GetxController {
   RxList<DatabaseModel> list = <DatabaseModel>[].obs;
   RxList<DatabaseModel> items = <DatabaseModel>[].obs;
 
+  Rx<DatabaseModel> itemList = DatabaseModel().obs;
+  RxBool checkListItem = false.obs;
+
   TextEditingController row1 = TextEditingController();
   TextEditingController row2 = TextEditingController();
   TextEditingController row3 = TextEditingController();

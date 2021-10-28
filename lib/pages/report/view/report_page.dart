@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
+import 'package:stok_takip_offline/components/pie_chart.dart';
 
 import 'package:stok_takip_offline/components/report_bottom.dart';
 import 'package:stok_takip_offline/components/report_card.dart';
 import 'package:stok_takip_offline/core/components/banner/top_banner.dart';
 import 'package:stok_takip_offline/core/components/text_form_field/text_form_field1.dart';
+import 'package:stok_takip_offline/database/database_model.dart';
 import 'package:stok_takip_offline/pages/report/controller/report_controller.dart';
 import 'package:stok_takip_offline/utils/const/const.dart';
+import 'package:syncfusion_flutter_charts/charts.dart';
 
 class ReportPage extends StatefulWidget {
   ReportPage({Key? key}) : super(key: key);
@@ -86,43 +89,27 @@ class _ReportPageState extends State<ReportPage> with TickerProviderStateMixin {
     );
   }
 
-  Column weeklyView() {
+  Column monthlyView() {
     return Column(
       children: [
         Expanded(
-          flex: 6,
-          child: ListView.builder(
-            itemCount: _reportController.listWeek.length,
-            itemBuilder: (context, index) {
-              var list = _reportController.listWeek[index];
-              return ReportCard(list: list);
-            },
-          ),
-        ),
+            flex: 6, child: PieChart(list: _reportController.listMonth.value)),
         Expanded(
           flex: 1,
-          child: ReportBottom(list:_reportController.listWeek),
+          child: ReportBottom(list: _reportController.listMonth.value),
         ),
       ],
     );
   }
 
-  Column monthlyView() {
+  Column weeklyView() {
     return Column(
       children: [
         Expanded(
-          flex: 6,
-          child: ListView.builder(
-            itemCount: _reportController.listMonth.length,
-            itemBuilder: (context, index) {
-              var list = _reportController.listMonth[index];
-              return ReportCard(list: list);
-            },
-          ),
-        ),
+            flex: 6, child: PieChart(list: _reportController.listWeek.value)),
         Expanded(
           flex: 1,
-          child: ReportBottom(list:_reportController.listMonth),
+          child: ReportBottom(list: _reportController.listWeek.value),
         ),
       ],
     );
@@ -132,19 +119,10 @@ class _ReportPageState extends State<ReportPage> with TickerProviderStateMixin {
     return Column(
       children: [
         Expanded(
-          flex: 6,
-          child: ListView.builder(
-              itemCount: _reportController.listNow.length,
-              itemBuilder: (context, index) {
-                var list = _reportController.listNow[index];
-                return ReportCard(list: list);
-              },
-            ),
-          ),
-        
+            flex: 6, child: PieChart(list: _reportController.listNow.value)),
         Expanded(
           flex: 1,
-          child: ReportBottom(list:_reportController.listNow),
+          child: ReportBottom(list: _reportController.listNow.value),
         ),
       ],
     );

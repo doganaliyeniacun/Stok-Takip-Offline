@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 
 import 'package:google_fonts/google_fonts.dart';
 import 'package:stok_takip_offline/database/database_helper.dart';
+import 'package:stok_takip_offline/pages/database_page/view/database_page.dart';
 import 'package:stok_takip_offline/pages/main/view/main_page.dart';
 import 'package:stok_takip_offline/pages/new_stock/view/new_stock_page.dart';
 import 'package:stok_takip_offline/pages/report/view/report_page.dart';
@@ -52,6 +53,7 @@ class _MyAppState extends State<MyApp> {
         GetPage(name: '/menu3', page: () => StockDeleteUpdatePage()),
         GetPage(name: '/menu4', page: () => StockListPage()),
         GetPage(name: '/menu5', page: () => ReportPage()),
+        GetPage(name: '/menu6', page: () => DatabasePage()),
         GetPage(name: '/update', page: () => StockUpdatePage()),
         // GetPage(name: 'menu1', page: () => null, binding: SampleBind()),
       ],

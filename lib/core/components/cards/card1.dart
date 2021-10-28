@@ -11,13 +11,14 @@ class CustomMenuCard1 extends StatelessWidget {
 
   final String name;
   final Color color;
-  
+
   final Function()? function;
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return InkWell(
       onTap: function,
+      splashColor: Colors.red,
       child: Card(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20),

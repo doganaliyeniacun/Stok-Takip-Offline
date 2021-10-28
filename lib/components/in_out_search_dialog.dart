@@ -7,45 +7,46 @@ import 'package:stok_takip_offline/utils/const/const.dart';
 
 Future<dynamic> searchStock(BuildContext context) {
   StockInOutController _stockInOutController = Get.put(StockInOutController());
-    return showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        content: Container(
-          height: Get.height * 0.99,
-          width: Get.width * 0.99,
-          decoration: BoxDecoration(
-            border: Border.all(
-              color: AppConstant.blueShade200,
-              width: 3,
-            ),
-            borderRadius: BorderRadius.circular(20),
+  return showDialog(
+    context: context,
+    builder: (context) => AlertDialog(
+      content: Container(
+        height: Get.height * 0.99,
+        width: Get.width * 0.99,
+        decoration: BoxDecoration(
+          border: Border.all(
+            color: AppConstant.blueShade200,
+            width: 3,
           ),
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              children: [
-                CustomTextFormField1(
-                  name: "stockNameOrCode",
-                  textInputType: TextInputType.text,
-                  prefixIcon: Icons.search,
-                  textEditingController: _stockInOutController.searchController,
-                  onChanged: (value) =>
-                      _stockInOutController.searchStockList(value.toString()),
-                ),
-                Expanded(
-                  child: Obx(
-                    () => ListView.builder(
-                      itemCount: _stockInOutController.items.length,
-                      itemBuilder: (context, index) {
-                        var list = _stockInOutController.items[index];
-                        return IntrinsicHeight(
-                          child: GestureDetector(
-                            onTap: () {
-                              _stockInOutController.row1.text =
-                                  list.stockCode.toString();
-
-                              Get.back();
-                            },
+          borderRadius: BorderRadius.circular(20),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            children: [
+              CustomTextFormField1(
+                name: "stockNameOrCode",
+                textInputType: TextInputType.text,
+                prefixIcon: Icons.search,
+                textEditingController: _stockInOutController.searchController,
+                onChanged: (value) =>
+                    _stockInOutController.searchStockList(value.toString()),
+              ),
+              Expanded(
+                child: Obx(
+                  () => ListView.builder(
+                    itemCount: _stockInOutController.items.length,
+                    itemBuilder: (context, index) {
+                      var list = _stockInOutController.items[index];
+                      return IntrinsicHeight(
+                        child: GestureDetector(
+                          onTap: () {
+                            _stockInOutController.row1.text =
+                                list.stockCode.toString();
+                            _stockInOutController.itemList.value = list;
+                            _stockInOutController.checkListItem.value = true;
+                            Get.back();
+                          },
                           child: Padding(
                             padding: const EdgeInsets.all(3.0),
                             child: Container(
