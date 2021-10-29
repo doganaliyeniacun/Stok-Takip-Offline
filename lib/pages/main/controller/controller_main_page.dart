@@ -9,7 +9,6 @@ class MainController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-
     _ad = BannerAd(
         size: AdSize.banner,
         adUnitId: "ca-app-pub-8138129845044197/1147227496",
@@ -33,6 +32,49 @@ class MainController extends GetxController {
       );
     } else {
       return const Text("");
+    }
+  }
+
+  InterstitialAd? _interstitialAd;
+
+  // TODO: Add _isInterstitialAdReady
+  bool _isInterstitialAdReady = false;
+
+  // TODO: Implement _loadInterstitialAd()
+  void _loadInterstitialAd() {
+    InterstitialAd.load(
+      adUnitId: "ca-app-pub-8138129845044197/2024183134",
+      request: const AdRequest(),
+      adLoadCallback: InterstitialAdLoadCallback(
+        onAdLoaded: (ad) {
+          _interstitialAd = ad;
+
+          ad.fullScreenContentCallback = FullScreenContentCallback(
+            onAdDismissedFullScreenContent: (ad) {},
+          );
+
+          _isInterstitialAdReady = true;
+        },
+        onAdFailedToLoad: (err) {
+          print('Failed to load an interstitial ad: ${err.message}');
+          _isInterstitialAdReady = false;
+        },
+      ),
+    );
+  }
+
+  int limit = 0;
+  void checkInterstitial() {
+    limit = limit + 1;
+    print(limit);
+    if (limit >= 3) {
+      _loadInterstitialAd();
+      if (_isInterstitialAdReady) {
+        _interstitialAd!.show();
+        _isInterstitialAdReady = false;
+      }
+
+      limit = 0;
     }
   }
 }

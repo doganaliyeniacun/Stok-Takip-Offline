@@ -8,6 +8,7 @@ import 'package:stok_takip_offline/components/list_item.dart';
 import 'package:stok_takip_offline/core/components/banner/top_banner.dart';
 import 'package:stok_takip_offline/core/components/buttons/elevated_button1.dart';
 import 'package:stok_takip_offline/core/components/text_form_field/text_form_field1.dart';
+import 'package:stok_takip_offline/pages/main/controller/controller_main_page.dart';
 import 'package:stok_takip_offline/pages/stock_in_out/controller/stock_in_out_controller.dart';
 import 'package:stok_takip_offline/utils/const/const.dart';
 
@@ -25,6 +26,7 @@ class _StockInOutPageState extends State<StockInOutPage> {
 
   final StockInOutController _stockInOutController =
       Get.put(StockInOutController());
+  final MainController _mainController = Get.find();
 
   late BuildContext publicContext;
 
@@ -52,7 +54,9 @@ class _StockInOutPageState extends State<StockInOutPage> {
               children: [
                 Expanded(
                   flex: 1,
-                  child: TopBanner(color: AppConstant.blueShade200),
+                  child: TopBanner(
+                    color: AppConstant.blueShade200,
+                  ),
                 ),
                 Expanded(
                   flex: 6,
