@@ -47,12 +47,12 @@ class DatabasePage extends StatelessWidget {
       // ignore: prefer_const_literals_to_create_immutables
       children: [
         CustomMenuCard1(
-          name: "Rapor ve Listeyi\nExcele Aktar",
+          name: "export".tr,
           color: AppConstant.blueShade200,
           function: () => _databaseController.getStoragePermission(),
         ),
         CustomMenuCard1(
-          name: "Veritabanını\nYedekle ve Paylaş",
+          name: "backUp".tr,
           color: AppConstant.blueShade200,
           function: ()=> _databaseController.docBackUpAndShare(),
         ),      

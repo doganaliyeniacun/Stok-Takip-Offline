@@ -214,7 +214,72 @@ class DatabaseController extends GetxController {
     sheet.getRangeByName('H3').setNumber(incomingMoney(listNow));
     sheet.getRangeByName('H4').setNumber(balance(listNow));
 
-    
+    //weekly
+    sheet.getRangeByName('G6:H6').merge();
+    sheet.getRangeByName('G6:H6').columnWidth = 19.0;
+
+    sheet.getRangeByName('G6').setText("weekly".tr);
+    sheet.getRangeByName('G7').setText("outgoingMoney".tr);
+    sheet.getRangeByName('H7').setText("incomingMoney".tr);
+    sheet.getRangeByName('G9').setText("balance".tr);
+
+    sheet.getRangeByName('G6').cellStyle.fontSize = 12;
+    sheet.getRangeByName('G7').cellStyle.fontSize = 12;
+    sheet.getRangeByName('H7').cellStyle.fontSize = 12;
+    sheet.getRangeByName('G9').cellStyle.fontSize = 12;
+
+    sheet.getRangeByName('G6').cellStyle.bold = true;
+    sheet.getRangeByName('G7').cellStyle.bold = true;
+    sheet.getRangeByName('H7').cellStyle.bold = true;
+    sheet.getRangeByName('G9').cellStyle.bold = true;
+
+    sheet.getRangeByName('G6').cellStyle.hAlign = HAlignType.center;
+    sheet.getRangeByName('G7').cellStyle.hAlign = HAlignType.center;
+    sheet.getRangeByName('H7').cellStyle.hAlign = HAlignType.center;
+    sheet.getRangeByName('G9').cellStyle.hAlign = HAlignType.center;
+
+    sheet.getRangeByName('G6').cellStyle.backColor = '#F7E5A6';
+    sheet.getRangeByName('H7').cellStyle.backColor = '#FFC0CB';
+    sheet.getRangeByName('G7').cellStyle.backColor = '#00FFFF';
+    sheet.getRangeByName('G9:H9').cellStyle.backColor = '#89CFF0';
+
+    sheet.getRangeByName('G8').setNumber(outgoingMoney(listWeek));
+    sheet.getRangeByName('H8').setNumber(incomingMoney(listWeek));
+    sheet.getRangeByName('H9').setNumber(balance(listWeek));
+
+    //monthly
+
+    sheet.getRangeByName('G11:H11').merge();
+    sheet.getRangeByName('G11:H11').columnWidth = 19.0;
+
+    sheet.getRangeByName('G11').setText("monthly".tr);
+    sheet.getRangeByName('G12').setText("outgoingMoney".tr);
+    sheet.getRangeByName('H12').setText("incomingMoney".tr);
+    sheet.getRangeByName('G14').setText("balance".tr);
+
+    sheet.getRangeByName('G11').cellStyle.fontSize = 12;
+    sheet.getRangeByName('G12').cellStyle.fontSize = 12;
+    sheet.getRangeByName('H12').cellStyle.fontSize = 12;
+    sheet.getRangeByName('G14').cellStyle.fontSize = 12;
+
+    sheet.getRangeByName('G11').cellStyle.bold = true;
+    sheet.getRangeByName('G12').cellStyle.bold = true;
+    sheet.getRangeByName('H12').cellStyle.bold = true;
+    sheet.getRangeByName('G14').cellStyle.bold = true;
+
+    sheet.getRangeByName('G11').cellStyle.hAlign = HAlignType.center;
+    sheet.getRangeByName('G12').cellStyle.hAlign = HAlignType.center;
+    sheet.getRangeByName('H12').cellStyle.hAlign = HAlignType.center;
+    sheet.getRangeByName('G14').cellStyle.hAlign = HAlignType.center;
+
+    sheet.getRangeByName('G11').cellStyle.backColor = '#FF4747';
+    sheet.getRangeByName('H12').cellStyle.backColor = '#FFC0CB';
+    sheet.getRangeByName('G12').cellStyle.backColor = '#00FFFF';
+    sheet.getRangeByName('G14:H14').cellStyle.backColor = '#89CFF0';
+
+    sheet.getRangeByName('G13').setNumber(outgoingMoney(listMonth));
+    sheet.getRangeByName('H13').setNumber(incomingMoney(listMonth));
+    sheet.getRangeByName('H14').setNumber(balance(listMonth));
 
     //Save the excel.
     final List<int> bytes = workbook.saveAsStream();
@@ -236,5 +301,7 @@ class DatabaseController extends GetxController {
 
     // //Dispose the document.
     workbook.dispose();
+
+    Get.snackbar("alert".tr, "exporting".tr);
   }
 }

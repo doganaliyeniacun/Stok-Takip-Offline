@@ -48,12 +48,17 @@ class StokTakipTranlations extends Translations {
           'usedStockCode': 'Bu stok kodu daha önce kullanılmış.',
           'snackSave': 'Stok kaydedildi.',
           'stockNotFound': 'Stok bulunamadı.',
-          'zero' : 'Sıfırdan küçük olamaz!',
+          'zero': 'Sıfırdan küçük olamaz!',
 
           //search
           'stockNameOrCode': 'Stok kodu veya adı.',
 
           'alert': 'Uyarı!',
+
+          //excel
+          'export': 'Rapor ve Listeyi Excele Aktar',
+          'backUp': 'Veritabanını Yedekle ve Paylaş',
+          'exporting': 'Aktarım başarılı.',
         },
         'en_US': {
           'menu1': 'Stock\nIn - Out',
@@ -99,13 +104,17 @@ class StokTakipTranlations extends Translations {
           'usedStockCode': 'This Stock Code Has Been Used Before.',
           'snackSave': 'Succesfull',
           'stockNotFound': 'Stock Not Found.',
-          'zero' : 'Cannot be less than zero!',
+          'zero': 'Cannot be less than zero!',
 
           //search
           'stockNameOrCode': 'Stock Code or Name',
 
           'alert': 'Alert!',
-          
+
+          //excel
+          'export': 'Export\nReport and List',
+          'backUp': 'Backup Database\nand Share Files',
+          'exporting': 'Exporting Succesfull',
         }
       };
 }
