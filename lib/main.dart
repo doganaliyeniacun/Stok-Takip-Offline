@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 import 'package:google_fonts/google_fonts.dart';
@@ -26,7 +27,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   InitTranslations initTranslations = Get.put(InitTranslations());
   final DatabaseHelper _databaseHelper = Get.put(DatabaseHelper());
-
+  
   @override
   void initState() {
     _databaseHelper.database;
@@ -35,6 +36,7 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       translations: StokTakipTranlations(),
