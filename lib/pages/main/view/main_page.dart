@@ -3,10 +3,13 @@ import 'package:get/get.dart';
 import 'package:stok_takip_offline/components/image_asset.dart';
 import 'package:stok_takip_offline/core/components/Cards/card1.dart';
 import 'package:stok_takip_offline/core/components/banner/top_banner.dart';
+import 'package:stok_takip_offline/pages/main/controller/controller_main_page.dart';
 import 'package:stok_takip_offline/utils/const/const.dart';
 import 'package:stok_takip_offline/utils/internationalization/translations.dart';
 
 class MainPage extends GetView<InitTranslations> {
+  final MainController _mainController = Get.put(MainController());
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -23,7 +26,12 @@ class MainPage extends GetView<InitTranslations> {
         children: [
           Expanded(
             flex: 1,
-            child: TopBanner(color: AppConstant.blueShade200),
+            child: Obx(
+              () => TopBanner(
+                color: AppConstant.blueShade200,
+                widget: _mainController.checkForAd(),
+              ),
+            ),
           ),
           const Expanded(
             flex: 6,
@@ -47,33 +55,51 @@ class MainPage extends GetView<InitTranslations> {
       children: [
         CustomMenuCard1(
           name: "menu1",
-          function: () => Get.toNamed("/menu1"),
+          function: () {
+            _mainController.checkInterstitial();
+            Get.toNamed("/menu1");
+          },
           color: AppConstant.blueShade200,
         ),
         CustomMenuCard1(
           name: "menu2",
-          function: () => Get.toNamed("/menu2"),
+          function: () {
+            _mainController.checkInterstitial();
+            Get.toNamed("/menu2");
+          },
           color: AppConstant.blueShade200,
         ),
         CustomMenuCard1(
           name: "menu3",
           color: AppConstant.blueShade200,
-          function: () => Get.toNamed("/menu3"),
+          function: () {
+            _mainController.checkInterstitial();
+            Get.toNamed("/menu3");
+          },
         ),
         CustomMenuCard1(
           name: "menu4",
           color: AppConstant.blueShade200,
-          function: () => Get.toNamed("/menu4"),
+          function: () {
+            _mainController.checkInterstitial();
+            Get.toNamed("/menu4");
+          },
         ),
         CustomMenuCard1(
           name: "menu5",
           color: AppConstant.blueShade200,
-          function: () => Get.toNamed("/menu5"),
+          function: () {
+            _mainController.checkInterstitial();
+            Get.toNamed("/menu5");
+          },
         ),
         CustomMenuCard1(
           name: "menu6",
           color: AppConstant.blueShade200,
-          function: () => Get.toNamed("/menu6"),
+          function: () {
+            _mainController.checkInterstitial();
+            Get.toNamed("/menu6");
+          },
         ),
       ],
     );

@@ -2,14 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:get/get.dart';
-import 'package:path/path.dart';
 import 'package:stok_takip_offline/components/image_asset.dart';
 import 'package:stok_takip_offline/components/in_out_search_dialog.dart';
 import 'package:stok_takip_offline/components/list_item.dart';
 import 'package:stok_takip_offline/core/components/banner/top_banner.dart';
 import 'package:stok_takip_offline/core/components/buttons/elevated_button1.dart';
 import 'package:stok_takip_offline/core/components/text_form_field/text_form_field1.dart';
-import 'package:stok_takip_offline/database/database_model.dart';
+import 'package:stok_takip_offline/pages/main/controller/controller_main_page.dart';
 import 'package:stok_takip_offline/pages/stock_in_out/controller/stock_in_out_controller.dart';
 import 'package:stok_takip_offline/utils/const/const.dart';
 
@@ -25,7 +24,9 @@ class _StockInOutPageState extends State<StockInOutPage> {
 
   GlobalKey<ScaffoldState> scaffold = GlobalKey();
 
-  final StockInOutController _stockInOutController = Get.put(StockInOutController());
+  final StockInOutController _stockInOutController =
+      Get.put(StockInOutController());
+  final MainController _mainController = Get.find();
 
   late BuildContext publicContext;
 
@@ -53,7 +54,9 @@ class _StockInOutPageState extends State<StockInOutPage> {
               children: [
                 Expanded(
                   flex: 1,
-                  child: TopBanner(color: AppConstant.blueShade200),
+                  child: TopBanner(
+                    color: AppConstant.blueShade200,
+                  ),
                 ),
                 Expanded(
                   flex: 6,
@@ -61,10 +64,9 @@ class _StockInOutPageState extends State<StockInOutPage> {
                   child: Container(
                     height: Get.height * 0.10,
                     child: Obx(
-                      () =>
-                          _stockInOutController.checkListItem.value
-                              ? ListItem(_stockInOutController.itemList.value)
-                              : CenterImage(),
+                      () => _stockInOutController.checkListItem.value
+                          ? ListItem(_stockInOutController.itemList.value)
+                          : CenterImage(),
                     ),
                   ),
                 ),
@@ -189,6 +191,7 @@ class _StockInOutPageState extends State<StockInOutPage> {
         GestureDetector(
           onTap: () {
             searchStock(publicContext);
+            _stockInOutController.getSearchList();
           },
           child: Icon(
             Icons.find_replace_sharp,
