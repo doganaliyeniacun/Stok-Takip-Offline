@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 import 'package:google_fonts/google_fonts.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:stok_takip_offline/database/database_helper.dart';
 import 'package:stok_takip_offline/pages/database_page/view/database_page.dart';
 import 'package:stok_takip_offline/pages/main/view/main_page.dart';
@@ -17,7 +18,12 @@ import 'package:stok_takip_offline/pages/stock_update/view/stock_update_page.dar
 
 import 'package:stok_takip_offline/utils/internationalization/translations.dart';
 
-void main() => runApp(MyApp());
+void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  MobileAds.instance.initialize();
+
+  runApp(MyApp());
+}
 
 class MyApp extends StatefulWidget {
   @override
@@ -27,7 +33,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   InitTranslations initTranslations = Get.put(InitTranslations());
   final DatabaseHelper _databaseHelper = Get.put(DatabaseHelper());
-  
+
   @override
   void initState() {
     _databaseHelper.database;

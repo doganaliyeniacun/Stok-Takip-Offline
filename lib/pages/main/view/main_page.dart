@@ -3,10 +3,13 @@ import 'package:get/get.dart';
 import 'package:stok_takip_offline/components/image_asset.dart';
 import 'package:stok_takip_offline/core/components/Cards/card1.dart';
 import 'package:stok_takip_offline/core/components/banner/top_banner.dart';
+import 'package:stok_takip_offline/pages/main/controller/controller_main_page.dart';
 import 'package:stok_takip_offline/utils/const/const.dart';
 import 'package:stok_takip_offline/utils/internationalization/translations.dart';
 
 class MainPage extends GetView<InitTranslations> {
+  final MainController _mainController = Get.put(MainController());
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -23,7 +26,12 @@ class MainPage extends GetView<InitTranslations> {
         children: [
           Expanded(
             flex: 1,
-            child: TopBanner(color: AppConstant.blueShade200),
+            child: Obx(
+              () => TopBanner(
+                color: AppConstant.blueShade200,
+                widget: _mainController.checkForAd(),
+              ),
+            ),
           ),
           const Expanded(
             flex: 6,
