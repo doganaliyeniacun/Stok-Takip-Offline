@@ -1,15 +1,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.stok_takip_offline">
+    package="com.stockmanagerfree.app">
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.ACCESS_MEDIA_LOCATION"/>
-    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE"/>
-    
-    
+    <uses-permission android:name="android.permission.CAMERA" />
   
    <application
         android:requestLegacyExternalStorage="true"
-        android:label="stok_takip_offline"
+        android:label="Stok Takip - Barkod Okuyucu"
         android:icon="@mipmap/launcher_icon">
         <meta-data
               android:name="com.google.android.gms.ads.APPLICATION_ID"

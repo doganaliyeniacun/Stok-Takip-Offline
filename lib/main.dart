@@ -47,7 +47,7 @@ class _MyAppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,
       translations: StokTakipTranlations(),
       locale: Get.deviceLocale,
-      fallbackLocale: const Locale('tr', 'TR'),
+      fallbackLocale: const Locale('en', 'US'),
       theme: ThemeData(
         textTheme: GoogleFonts.poppinsTextTheme(
           Theme.of(context).textTheme,

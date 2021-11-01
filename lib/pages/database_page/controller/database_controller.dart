@@ -94,11 +94,9 @@ class DatabaseController extends GetxController {
 
   //Storage permission
   Future getStoragePermission() async {
-    if (await Permission.storage.request().isGranted &&
-        await Permission.accessMediaLocation.request().isGranted) {
+    if (await Permission.storage.request().isGranted) {
       generateExcel();
-    } else if (await Permission.storage.request().isPermanentlyDenied &&
-        await Permission.accessMediaLocation.request().isPermanentlyDenied) {
+    } else if (await Permission.storage.request().isPermanentlyDenied) {
       await openAppSettings();
     }
   }
