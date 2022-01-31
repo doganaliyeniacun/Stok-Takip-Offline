@@ -98,10 +98,7 @@ class _NewStockPageState extends State<NewStockPage> {
     return CustomElevatedButton1(
       name: "save",
       function: () {
-        if (formState.currentState!.validate()) {
-          formState.currentState!.save();
-          _newStockController.saveFunc();
-        }
+        _newStockController.saveFunc();
       },
       color: AppConstant.blueShade200,
     );
@@ -200,6 +197,8 @@ class _NewStockPageState extends State<NewStockPage> {
     // message was in flight, we want to discard the reply rather than calling
     // setState to update our non-existent appearance.
 
-    barcodeScanRes != "-1" ?_newStockController.row2.text = barcodeScanRes : barcodeScanRes = "";
+    barcodeScanRes != "-1"
+        ? _newStockController.row2.text = barcodeScanRes
+        : barcodeScanRes = "";
   }
 }

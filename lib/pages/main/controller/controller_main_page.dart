@@ -11,7 +11,7 @@ class MainController extends GetxController {
     super.onInit();
     _ad = BannerAd(
         size: AdSize.banner,
-        adUnitId: "ca-app-pub-8138129845044197/1147227496",
+        adUnitId: "ca-app-pub-5702028324956530/6098823776",
         listener: BannerAdListener(onAdLoaded: (_) {
           isLoaded.value = true;
         }, onAdFailedToLoad: (_, error) {
@@ -43,7 +43,7 @@ class MainController extends GetxController {
   // TODO: Implement _loadInterstitialAd()
   void _loadInterstitialAd() {
     InterstitialAd.load(
-      adUnitId: "ca-app-pub-8138129845044197/2024183134",
+      adUnitId: "ca-app-pub-5702028324956530/3217509561",
       request: const AdRequest(),
       adLoadCallback: InterstitialAdLoadCallback(
         onAdLoaded: (ad) {

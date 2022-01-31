@@ -184,14 +184,6 @@ class _StockUpdatePageState extends State<StockUpdatePage> {
       name: "stockName",
       textEditingController: _stockUpdateController.row1,
       textInputAction: TextInputAction.next,
-      validator: (value) {
-        if (_stockUpdateController.checkStockName(value.toString())) {
-          return "usedStockName".tr;
-        }
-        if (_stockUpdateController.row1.text.isEmpty) {
-          return "stockNameRequired".tr;
-        }
-      },
     );
   }
 
