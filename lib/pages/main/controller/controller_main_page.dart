@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
@@ -17,8 +19,9 @@ class MainController extends GetxController {
         }, onAdFailedToLoad: (_, error) {
           print("Ad Failed to Load with Error= $error");
         }),
-        request: AdRequest());
+        request: const AdRequest());
     _ad.load();
+    admobTimer();
   }
 
   Widget checkForAd() {
@@ -63,18 +66,41 @@ class MainController extends GetxController {
     );
   }
 
-  int limit = 0;
+  bool checkTime = false;
+
   void checkInterstitial() {
-    limit = limit + 1;
-    print(limit);
-    if (limit >= 3) {
+    if (checkTime == true) {
       _loadInterstitialAd();
       if (_isInterstitialAdReady) {
         _interstitialAd!.show();
         _isInterstitialAdReady = false;
       }
 
-      limit = 0;
+      checkTime = false;
     }
   }
+
+  void admobTimer() {
+    Timer.periodic(
+      const Duration(minutes: 5),
+      (timer) {
+        checkTime = true;
+      },
+    );
+  }
+
+  // int limit = 0;
+  // void checkInterstitial() {
+  //   limit = limit + 1;
+  //   print(limit);
+  //   if (limit >= 3) {
+  //     _loadInterstitialAd();
+  //     if (_isInterstitialAdReady) {
+  //       _interstitialAd!.show();
+  //       _isInterstitialAdReady = false;
+  //     }
+
+  //     limit = 0;
+  //   }
+  // }
 }
