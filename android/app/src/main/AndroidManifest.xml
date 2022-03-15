@@ -1,16 +1,21 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.stockmanagerfree.app">
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.CAMERA" />
   
    <application
+        tools:replace="android:label"
         android:requestLegacyExternalStorage="true"
         android:label="Stok Takip - Barkod Okuyucu"
         android:icon="@mipmap/launcher_icon">
         <meta-data
               android:name="com.google.android.gms.ads.APPLICATION_ID"
               android:value="ca-app-pub-5702028324956530~5743600553"/>
+              
+        <meta-data android:name="com.google.android.gms.version"
+              android:value="@integer/google_play_services_version" />
         <activity            
             android:name=".MainActivity"
             android:launchMode="singleTop"

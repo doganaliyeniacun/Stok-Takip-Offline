@@ -26,7 +26,7 @@ class _StockInOutPageState extends State<StockInOutPage> {
 
   final StockInOutController _stockInOutController =
       Get.put(StockInOutController());
-  final MainController _mainController = Get.find();
+  
 
   late BuildContext publicContext;
 

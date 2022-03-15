@@ -51,7 +51,7 @@ android {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
         applicationId "com.stockmanagerfree.app"
         minSdkVersion 21
-        targetSdkVersion 30
+        targetSdkVersion 31
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
     }
@@ -78,6 +78,7 @@ flutter {
 }
 
 dependencies {
+    implementation 'com.ironsource.sdk:mediationsdk:7.2.1'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'com.google.android.gms:play-services-ads:20.4.0'
 }
