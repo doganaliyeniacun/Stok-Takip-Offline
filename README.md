@@ -11,4 +11,4 @@ git clone https://github.com/doganaliyeniacun/Stok-Takip-Offline.git
 ```
 
 ## License
-[MIT](https://choosealicense.com/licenses/mit/)
+[MIT](https://github.com/doganaliyeniacun/Stok-Takip-Offline/blob/version1/LICENSE)
